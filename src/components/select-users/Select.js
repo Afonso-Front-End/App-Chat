@@ -42,7 +42,7 @@ export default function Select() {
     // Ouvinte para a mensagem enviada pela página de login
     const messageListener = (event) => {
       // Verifique se a origem da mensagem é a esperada
-      if (event.origin === 'https://login-users-systen.netlify.app') {
+      if (event.origin === 'https://anonimus-chat.netlify.app') {
         // Verifique se a mensagem contém um token válido
         if (event.data && event.data.token) {
           const token = event.data.token;
