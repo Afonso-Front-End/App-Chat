@@ -6,35 +6,39 @@ import Navigation from '../navigation/Navigation'
 
 
 export default function Select() {
-    const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
 
-    useEffect(() => {
-        // Função para decodificar o token
-        const decodeToken = (token) => {
-            try {
+  useEffect(() => {
+      // Função para decodificar o token
+      const decodeToken = (token) => {
+          try {
               if (typeof token === "string") {
-                const decoded = jwtDecode(token);
-                return decoded;
+                  const decoded = jwtDecode(token);
+                  return decoded;
               } else {
-                console.error("O token não é uma string válida:", token);
-                return null;
+                  console.error("O token não é uma string válida:", token);
+                  return null;
               }
-            } catch (error) {
+          } catch (error) {
               console.error("Erro ao decodificar o token:", error);
               return null;
-            }
-          };
+          }
+      };
 
-        // Obtendo o token do armazenamento (por exemplo, localStorage)
-        const token = localStorage.getItem("token");
-        console.log("Token:", token);
+      // Obtendo o token do localStorage do outro domínio
+      const otherDomainToken = window.localStorage.getItem('token');
 
-        // Decodificando o token para obter as informações do usuário
-        const decodedUserInfo = decodeToken(token);
+      // Se houver um token do outro domínio
+      if (otherDomainToken) {
+          // Decodificando o token para obter as informações do usuário
+          const decodedUserInfo = decodeToken(otherDomainToken);
 
-        // Atualizando o estado com as informações do usuário
-        setUserInfo(decodedUserInfo);
-    }, []);
+          // Atualizando o estado com as informações do usuário
+          setUserInfo(decodedUserInfo);
+      } else {
+          console.error('Token do outro domínio não encontrado.');
+      }
+  }, []);
 
     console.log(userInfo)
     return (
