@@ -4,7 +4,6 @@ import { jwtDecode } from "jwt-decode";
 import imgGitAnonimus from '../../assets/img/img-git-Anonimo.jpg'
 import Navigation from '../navigation/Navigation'
 
-
 export default function Select() {
   const [userInfo, setUserInfo] = useState(null);
 
@@ -25,6 +24,31 @@ export default function Select() {
       }
     };
 
+    // Ouvinte para a mensagem enviada pela página de login
+    const messageListener = (event) => {
+      // Verifique se a origem da mensagem é a esperada
+      if (event.origin === 'https://login-users-systen.netlify.app') {
+        // Verifique se a mensagem contém um token válido
+        if (event.data && event.data.token) {
+          const token = event.data.token;
+
+          // Faça algo com o token
+          console.log('Token recebido:', token);
+
+          // Decodificando o token para obter as informações do usuário
+          const decodedUserInfo = decodeToken(token);
+
+          // Atualizando o estado com as informações do usuário
+          setUserInfo(decodedUserInfo);
+        } else {
+          console.error('Mensagem inválida - Token ausente');
+        }
+      }
+    };
+
+    // Adiciona o ouvinte de mensagem
+    window.addEventListener('message', messageListener);
+
     // Obtendo o token do localStorage do outro domínio
     const otherDomainToken = window.localStorage.getItem('token');
 
@@ -39,25 +63,6 @@ export default function Select() {
       console.error('Token do outro domínio não encontrado.');
     }
 
-    // Ouvinte para a mensagem enviada pela página de login
-    const messageListener = (event) => {
-      // Verifique se a origem da mensagem é a esperada
-      if (event.origin === 'https://anonimus-chat.netlify.app') {
-        // Verifique se a mensagem contém um token válido
-        if (event.data && event.data.token) {
-          const token = event.data.token;
-  
-          // Faça algo com o token
-          console.log('Token recebido:', token);
-        } else {
-          console.error('Mensagem inválida - Token ausente');
-        }
-      }
-    };
-
-    // Adiciona o ouvinte de mensagem
-    window.addEventListener('message', messageListener);
-
     // Remove o ouvinte de mensagem quando o componente é desmontado
     return () => {
       window.removeEventListener('message', messageListener);
@@ -66,7 +71,6 @@ export default function Select() {
 
   console.log(userInfo);
 
-  console.log(userInfo)
   return (
     <div className="area-select-user">
       <ul className="items-users">
@@ -82,7 +86,6 @@ export default function Select() {
         </li>
       </ul>
       <Navigation />
-
     </div>
   )
 }
