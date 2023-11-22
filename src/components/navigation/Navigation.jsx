@@ -3,12 +3,19 @@ import svgGrenage from '../../assets/icons/gear-fill.svg'
 import svgSearch from '../../assets/icons/search.svg'
 import imgGitAnonimus from '../../assets/img/img-git-Anonimo.jpg'
 import useScript from './script'
+import useDataToken from '../select-users/script'
 
 export default function Navigation() {
     const {
         search,
         handleSearch,
     } = useScript()
+
+    const {
+        userData,
+    } = useDataToken()
+
+    // console.log(userData)
     return (
         <div className='navigation'>
             <div className={`${search ? 'active-container-search' : 'container-search '}`} >
@@ -20,7 +27,7 @@ export default function Navigation() {
                                     <img src={imgGitAnonimus} alt="img-user" />
                                 </div>
                                 <div className="results-info-user">
-                                    <div className="results-name-user "><span>Name</span></div>
+                                    <div className="results-name-user "><span>Nome</span></div>
                                     <div className="results-mensage-user"><p>Mensagem</p></div>
                                 </div>
                             </div>
@@ -41,7 +48,9 @@ export default function Navigation() {
             <div className='navigation-profile'>
                 <div className="name-profile">
                     <span>Ola</span>
-                    <p>Name</p>
+                    {userData && (
+                        <p>{userData.nome}</p>
+                    )}
                 </div>
                 <div className='grenage-add-user'>
                     <div className="grenage">
