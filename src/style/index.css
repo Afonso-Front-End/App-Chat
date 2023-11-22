@@ -395,6 +395,13 @@
 .results-mensage-user p {
     color: #000;
 }
+.results-name-user span{
+    font-weight: 400;
+    font-size: 20px;
+}
+.results-mensage-user p {
+    font-size: 13px;
+}
 
 .mensage-results p {
     height: 50px;
