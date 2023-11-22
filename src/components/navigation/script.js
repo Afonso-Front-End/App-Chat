@@ -33,6 +33,33 @@ export default function useScript() {
 
     }
 
+    const handleAdicionarAmigo = async () => {
+        // Certifique-se de que há um resultado de pesquisa antes de tentar adicionar
+        if (resultadoPesquisa) {
+          const { usuario_identifier, amigo_identifier } = resultadoPesquisa;
+          try {
+            const resposta = await fetch('https://api-planetscale-fawn.vercel.app/adicionar-amigo', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ usuario_identifier, amigo_identifier }),
+            });
+    
+            if (resposta.ok) {
+              console.log('Amigo adicionado com sucesso!');
+              // Limpar o resultado da pesquisa após a adição bem-sucedida, se desejar
+              setResultadoPesquisa(null);
+            } else {
+              console.error('Erro ao adicionar amigo:', resposta.statusText);
+            }
+          } catch (erro) {
+            console.error('Erro de rede ao adicionar amigo:', erro);
+          }
+        }
+      };
+
+
     const handleSearch = () => {
         setSearch(!search)
     }
@@ -41,6 +68,7 @@ export default function useScript() {
         handleSearch,
         search,
         resultadoPesquisa, 
-        handlePesquisarAmigo
+        handlePesquisarAmigo,
+        handleAdicionarAmigo
     }
 }
