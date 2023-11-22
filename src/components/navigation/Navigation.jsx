@@ -21,8 +21,6 @@ export default function Navigation() {
         userData,
     } = useDataToken()
 
-    console.log(userData)
-
     return (
         <div className='navigation'>
             <div className={`${search ? 'active-container-search' : 'container-search '}`} >
