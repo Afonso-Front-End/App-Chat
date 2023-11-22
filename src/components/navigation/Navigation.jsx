@@ -13,7 +13,7 @@ export default function Navigation() {
         handleSearch,
         handlePesquisarAmigo,
         resultadoPesquisa,
-        handleAdicionarAmigo
+
     } = useScript()
 
     const {
@@ -29,7 +29,7 @@ export default function Navigation() {
                     <div className='content-results'>
                         <div className='profile-results'>
                             {resultadoPesquisa && resultadoPesquisa.map(amigo => (
-                                <div className='results' key={amigo.id} onClick={handleAdicionarAmigo}>
+                                <div className='results' key={amigo.id}>
                                     <div className="results-img-user">
                                         <img src={imgGitAnonimus} alt="img-user" />
                                     </div>
