@@ -28,22 +28,21 @@ export default function Navigation() {
                 <div className="container-results">
                     <div className='content-results'>
                         <div className='profile-results'>
-                            {resultadoPesquisa && resultadoPesquisa.map(amigo => (
-                                <div className='results' key={amigo.id}>
+                            {resultadoPesquisa && resultadoPesquisa.map(usuario => (
+                                <div className='results' key={usuario.id}>
                                     <div className="results-img-user">
                                         <img src={imgGitAnonimus} alt="img-user" />
                                     </div>
                                     <div className="results-info-user">
                                         <div className="results-name-user ">
-                                            <span>USUARIO: {amigo.nome} </span>
+                                            <span>USUARIO: {usuario.nome} </span>
                                         </div>
                                         <div className="results-mensage-user">
-                                            <p>INDENTIFICADOR: {amigo.identifier}</p>
+                                            <p>INDENTIFICADOR: {usuario.usuario_identifier}</p>
                                         </div>
                                         {/* <p>ID: {amigo.id}</p> */}
                                     </div>
                                 </div>
-
                             ))}
 
                             {/* <div className='mensage-results'>

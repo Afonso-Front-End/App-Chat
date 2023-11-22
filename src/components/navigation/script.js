@@ -4,24 +4,23 @@ export default function useScript() {
   const [search, setSearch] = useState(false)
 
   const [resultadoPesquisa, setResultadoPesquisa] = useState(null);
-
   const handlePesquisarAmigo = async () => {
     const inputPesquisa = document.getElementById('pesquisar-amigo');
     const identifier = inputPesquisa.value;
-
+  
     try {
       const resposta = await fetch(`https://api-planetscale-fawn.vercel.app/buscar-amigo/${identifier}`);
       const dados = await resposta.json();
-
+  
       if (resposta.ok) {
-        setResultadoPesquisa(dados.amigo);  // Ajuste aqui para dados.amigo.amigo
+        setResultadoPesquisa(dados.amigo.amigo);  // Ajuste aqui para dados.amigo.amigo
       } else {
         setResultadoPesquisa(null);
         console.error('Erro ao pesquisar amigo:', dados.erro);
       }
     } catch (erro) {
       console.error('Erro ao pesquisar amigo:', erro);
-
+  
       if (erro instanceof TypeError && erro.message === 'Failed to fetch') {
         // Erro de rede
         console.error('Erro de rede ao pesquisar amigo:', erro);
@@ -31,11 +30,7 @@ export default function useScript() {
       }
     }
   }
-
-
-
-
-
+  
   const handleSearch = () => {
     setSearch(!search)
   }
