@@ -21,8 +21,6 @@ export default function Navigation() {
         userData,
     } = useDataToken()
 
-    console.log(userData)
-
     return (
         <div className='navigation'>
             <div className={`${search ? 'active-container-search' : 'container-search '}`} >
@@ -80,8 +78,8 @@ export default function Navigation() {
                         <div className='text-new-user'>
                             <p>Novo Amigo</p>
                         </div>
-                        <div className='img-add-user' onClick={handleSearch}>
-                            <img src={svgAddUser} alt="img-add-user" />
+                        <div className='img-add-user'>
+                            <img src={svgAddUser} alt="img-add-user" onClick={handleSearch}/>
                         </div>
                     </div>
                 </div>
