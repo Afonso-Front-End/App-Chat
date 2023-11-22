@@ -6,10 +6,10 @@ export default function useScript() {
   const [resultadoPesquisa, setResultadoPesquisa] = useState(null);
   const handlePesquisarAmigo = async () => {
     const inputPesquisa = document.getElementById('pesquisar-amigo');
-    const identifier = inputPesquisa.value;
+    const usuario_identifier = inputPesquisa.value;
   
     try {
-      const resposta = await fetch(`https://api-planetscale-fawn.vercel.app/buscar-amigo/${identifier}`);
+      const resposta = await fetch(`https://api-planetscale-fawn.vercel.app/buscar-amigo/${usuario_identifier}`);
       const dados = await resposta.json();
   
       if (resposta.ok) {
@@ -30,7 +30,7 @@ export default function useScript() {
       }
     }
   }
-  
+
   const handleSearch = () => {
     setSearch(!search)
   }
