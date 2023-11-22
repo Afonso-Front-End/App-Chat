@@ -5,6 +5,8 @@ import imgGitAnonimus from '../../assets/img/img-git-Anonimo.jpg'
 import useScript from './script'
 import useDataToken from '../select-users/script'
 
+import { useState } from 'react'
+
 export default function Navigation() {
     const {
         search,
@@ -17,6 +19,40 @@ export default function Navigation() {
         userData,
     } = useDataToken()
 
+    const [amigoAdicionado, setAmigoAdicionado] = useState(false);
+
+    const adicionarAmigo = async () => {
+        const inputPesquisa = document.getElementById('pesquisar-amigo');
+        const amigoIdentifier = inputPesquisa.value;
+
+        try {
+            const resposta = await fetch('https://api-planetscale-fawn.vercel.app/adicionar-amigo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Adicione o token de autenticação aqui se necessário
+                    // 'Authorization': `Bearer ${seuTokenAqui}`,
+                },
+                body: JSON.stringify({
+                    usuario_identifier: userData.identifier, // Substitua por como você obtém o identifier do usuário logado
+                    amigo_identifier: amigoIdentifier,
+                }),
+            });
+
+            const dados = await resposta.json();
+
+            if (resposta.ok) {
+                setAmigoAdicionado(true);
+                console.log('Amigo adicionado com sucesso:', dados.mensagem);
+            } else {
+                console.error('Erro ao adicionar amigo:', dados.erro);
+            }
+        } catch (erro) {
+            console.error('Erro de rede ao adicionar amigo:', erro);
+        }
+    };
+
+    console.log(amigoAdicionado)
     // console.log(userData)
     return (
         <div className='navigation'>
@@ -25,7 +61,7 @@ export default function Navigation() {
                     <div className='content-results'>
                         <div className='profile-results'>
                             {resultadoPesquisa && resultadoPesquisa.map(amigo => (
-                                <div className='results' key={amigo.id}>
+                                <div className='results' key={amigo.id} onClick={adicionarAmigo}>
                                     <div className="results-img-user">
                                         <img src={imgGitAnonimus} alt="img-user" />
                                     </div>
@@ -84,5 +120,5 @@ export default function Navigation() {
             </div>
         </div>
     )
-    
+
 }
