@@ -23,9 +23,7 @@ export default function useScript() {
         setListaAmizades(dados.amigos);
         
         setMensagemAviso(dados.amigos.length === 0);
-      } else {
-        console.error('Erro ao listar amizades:', resposta.statusText);
-      }
+      } else { }
     } catch (erro) {
       console.error('Erro de rede ao listar amizades:', erro);
     }
