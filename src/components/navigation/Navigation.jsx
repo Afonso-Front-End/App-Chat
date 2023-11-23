@@ -13,7 +13,7 @@ export default function Navigation() {
         handleSearch,
         handlePesquisarAmigo,
         resultadoPesquisa,
-        handleAdicionarAmigo,
+        handleEnviarSolicitacaoAmizade,
         menssageResults,
 
     } = useScript()
@@ -29,7 +29,7 @@ export default function Navigation() {
                     <div className='content-results'>
                         <div className='profile-results'>
                             {resultadoPesquisa && resultadoPesquisa.map(usuario => (
-                                <div className='results' key={usuario.id} onClick={handleAdicionarAmigo}>
+                                <div className='results' key={usuario.id} onClick={handleEnviarSolicitacaoAmizade}>
                                     <div className="results-img-user">
                                         <img src={imgGitAnonimus} alt="img-user" />
                                     </div>
