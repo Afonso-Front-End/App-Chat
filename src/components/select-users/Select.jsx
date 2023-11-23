@@ -20,7 +20,7 @@ export default function Select() {
             </div>
           </li>
         ))}
-        {!listaAmizades && mensagemAviso &&  (
+        {mensagemAviso &&  (
           <div className='mensagem-aviso'>
                 <div className="img-mensagem-aviso">
                   <img src={imgGitAnonimus} alt="" />
