@@ -20,7 +20,6 @@ export default function useScript() {
 
       if (resposta.ok) {
         const dados = await resposta.json();
-        setMensagemAviso(false)
         setListaAmizades(dados.amigos);
       } else {
         console.error('Erro ao listar amizades:', resposta.statusText);
@@ -29,6 +28,12 @@ export default function useScript() {
       console.error('Erro de rede ao listar amizades:', erro);
     }
   }, [token]);
+  
+  if (listaAmizades.length > 0) {
+    setMensagemAviso(false)
+  }else{
+    setMensagemAviso(true)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
