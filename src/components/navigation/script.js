@@ -5,6 +5,7 @@ export default function useScript() {
   const [search, setSearch] = useState(false)
   const [resultadoPesquisa, setResultadoPesquisa] = useState(null);
   const [listaAmizades, setListaAmizades] = useState([]);
+  const [mensagemAviso, setMensagemAviso] = useState(true)
 
   const { userData, token } = useDataToken()
 
@@ -19,6 +20,7 @@ export default function useScript() {
 
       if (resposta.ok) {
         const dados = await resposta.json();
+        setMensagemAviso(false)
         setListaAmizades(dados.amigos);
       } else {
         console.error('Erro ao listar amizades:', resposta.statusText);
@@ -107,5 +109,6 @@ export default function useScript() {
     handlePesquisarAmigo,
     handleAdicionarAmigo,
     listaAmizades,
+    mensagemAviso
   }
 }
