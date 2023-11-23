@@ -29,11 +29,6 @@ export default function useScript() {
     }
   }, [token]);
   
-  if (listaAmizades.length > 0) {
-    setMensagemAviso(false)
-  }else{
-    setMensagemAviso(true)
-  }
 
   useEffect(() => {
     const fetchData = async () => {
