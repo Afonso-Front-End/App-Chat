@@ -5,7 +5,7 @@ export default function useScript() {
   const [search, setSearch] = useState(false)
   const [resultadoPesquisa, setResultadoPesquisa] = useState(null);
   const [listaAmizades, setListaAmizades] = useState([]);
-  const [mensagemAviso, setMensagemAviso] = useState(true)
+
 
   const { userData, token } = useDataToken()
 
@@ -109,6 +109,5 @@ export default function useScript() {
     handlePesquisarAmigo,
     handleAdicionarAmigo,
     listaAmizades,
-    mensagemAviso
   }
 }
