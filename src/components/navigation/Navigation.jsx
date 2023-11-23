@@ -14,6 +14,7 @@ export default function Navigation() {
         handlePesquisarAmigo,
         resultadoPesquisa,
         handleAdicionarAmigo,
+        menssageResults,
 
     } = useScript()
 
@@ -43,10 +44,11 @@ export default function Navigation() {
                                     </div>
                                 </div>
                             ))}
-
-                            {/* <div className='mensage-results'>
-                                <p>Nenhum amigo encontrado!</p>
-                            </div> */}
+                            {menssageResults && (
+                                <div className='mensage-results'>
+                                    <p>{menssageResults}</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -58,8 +60,8 @@ export default function Navigation() {
 
                     {/* input pesquisar */}
 
-                    <div className='img-search'>
-                        <img src={svgSearch} alt="img-search" onClick={handlePesquisarAmigo} />
+                    <div className='img-search' onClick={handlePesquisarAmigo}>
+                        <img src={svgSearch} alt="img-search" />
                     </div>
                 </div>
             </div>

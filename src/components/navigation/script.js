@@ -6,6 +6,7 @@ export default function useScript() {
   const [resultadoPesquisa, setResultadoPesquisa] = useState(null);
   const [listaAmizades, setListaAmizades] = useState([]);
   const [mensagemAviso, setMensagemAviso] = useState(true)
+  const [menssageResults, setMenssageResults] = useState(false)
 
   const { userData, token } = useDataToken()
 
@@ -43,27 +44,32 @@ export default function useScript() {
   const handlePesquisarAmigo = async () => {
     const inputPesquisa = document.getElementById('pesquisar-amigo');
     const usuario_identifier = inputPesquisa.value;
-    try {
-      const resposta = await fetch(`https://api-planetscale-fawn.vercel.app/buscar-usuario/${usuario_identifier}`);
-      const dados = await resposta.json();
-
-      if (resposta.ok) {
-        setResultadoPesquisa(dados.usuario);
-      } else {
-        setResultadoPesquisa(null);
-        console.error('Erro ao pesquisar amigo:', dados.erro);
-      }
-    } catch (erro) {
-      console.error('Erro ao pesquisar amigo:', erro);
-
-      if (erro instanceof TypeError && erro.message === 'Failed to fetch') {
-
-        console.error('Erro de rede ao pesquisar amigo:', erro);
-      } else {
-        console.error('Erro desconhecido ao pesquisar amigo:', erro);
+  
+    if (inputPesquisa.value === '') {
+      console.log('Digite algo.');
+    } else {
+      try {
+        const resposta = await fetch(`https://api-planetscale-fawn.vercel.app/buscar-usuario/${usuario_identifier}`);
+  
+        if (resposta.status === 200) {
+          const dados = await resposta.json();
+          setResultadoPesquisa(dados.usuario);
+          setMenssageResults('')
+        } else if(resposta.status === 204){
+          setResultadoPesquisa(null);
+          setMenssageResults('Nenhum usuario encontrado')
+        }
+      } catch (error) {
+        console.error('Erro ao pesquisar amigo:');
       }
     }
-  }
+  };
+  
+  
+  
+  
+  
+  
 
   const handleAdicionarAmigo = async () => {
     // Certifique-se de que há um resultado de pesquisa antes de tentar adicionar
@@ -109,6 +115,7 @@ export default function useScript() {
     handlePesquisarAmigo,
     handleAdicionarAmigo,
     listaAmizades,
-    mensagemAviso
+    mensagemAviso,
+    menssageResults,
   }
 }

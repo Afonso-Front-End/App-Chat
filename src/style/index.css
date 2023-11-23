@@ -371,12 +371,20 @@
 }
 
 .container-results {
-    background-color: #C7C8CC;
     border-radius: 4px;
     cursor: grab;
+    position: relative;
 }
 
-.container-results:hover{
+
+.results{
+    overflow: hidden;
+    border-radius: 4px;
+    position: absolute;
+    top: -85px;
+    background-color: #C7C8CC;
+}
+.results:hover {
     background-color: #808182;
 }
 .results-img-user {
@@ -407,10 +415,17 @@
     font-size: 13px;
 }
 
-.mensage-results p {
+.mensage-results{
     height: 50px;
-    text-align: center;
-    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -50px;
+    width: 100%;
+    background-color: #808182;
+}
+.mensage-results p {
     color: #000;
 }
 /* mensagem-aviso */

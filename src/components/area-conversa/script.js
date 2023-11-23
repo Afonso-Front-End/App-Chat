@@ -15,23 +15,33 @@ export default function useScript(){
 
     }
 
-    window.addEventListener('keyup', (event)=>{
-        const key = event.keyCode
-        if(key === 13){
-            handleSendMensage()
+    window.addEventListener('keyup', (event) => {
+        handleKeyPress(event);
+    });
+
+    const handleKeyPress = (event) => {
+        const key = event.key;
+        
+        if (key === 'Enter') {
+            if (inputValue.trim().length > 0) {
+                handleSendMessage();
+            }
         }
-    })
+    };
+    
+    const handleSendMessage = () => {
+        setMensagens([...mensagens, inputValue.trim()]);
+        setInputValue('');
+        setImgSend(false);
+    };
+    
    
-    const handleSendMensage = () => {
-        if (inputValue.trim() !== '') {
-            setMensagens([...mensagens, inputValue]);
-            setInputValue('');
-        }
-    }
+    
+
     return{
         handleInputChange,
         inputValue,
-        handleSendMensage,
+        handleSendMessage,
         mensagens,
         imgSend
     }

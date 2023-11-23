@@ -6,7 +6,7 @@ export default function Conversa() {
     const {
         handleInputChange,
         inputValue,
-        handleSendMensage,
+        handleSendMessage,
         mensagens,
         imgSend
 
@@ -43,11 +43,11 @@ export default function Conversa() {
                         <div className='input-text'>
                             <div className='input'>
                                 <input type="text" id='text-mensagem' placeholder='Mensagem' value={inputValue} onChange={handleInputChange} />
-                                <div className='img-send'>
-                                    {imgSend && (
-                                        <img src={svgSend} alt="img-enviar" onClick={handleSendMensage} />
-                                    )}
-                                </div>
+                                {imgSend && (
+                                    <div className='img-send'>
+                                        <img src={svgSend} alt="img-enviar" onClick={handleSendMessage} />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
