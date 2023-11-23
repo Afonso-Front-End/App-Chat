@@ -2,13 +2,14 @@ import React from 'react';
 import imgGitAnonimus from '../../assets/img/img-git-Anonimo.jpg'
 import Navigation from '../navigation/Navigation'
 import useScript from '../navigation/script';
+
 export default function Select() {
-  const { listaAmizades, mensagemAviso }= useScript()
+  const { listaAmizades, mensagemAviso } = useScript()
 
   return (
     <div className="area-select-user">
       <ul className="items-users">
-        {listaAmizades && listaAmizades.map((amizade, index)=> (
+        {listaAmizades && listaAmizades.map((amizade, index) => (
           <li className="user" key={index} >
             <div className="img-user">
               <img src={imgGitAnonimus} alt="img-user" />
@@ -20,17 +21,19 @@ export default function Select() {
             </div>
           </li>
         ))}
-        {mensagemAviso &&  (
+        {mensagemAviso && (
           <div className='mensagem-aviso'>
-                <div className="img-mensagem-aviso">
-                  <img src={imgGitAnonimus} alt="" />
-                  <span></span>
-                </div>
-                <div className="mensage-aviso"><p>Nenhuma amizade encontrada.</p></div>
+            <div className="img-mensagem-aviso">
+              <img src={imgGitAnonimus} alt="" />
+              <span></span>
+            </div>
+            <div className="mensage-aviso"><p>Nenhuma amizade encontrada.</p></div>
           </div>
         )}
       </ul>
+
       <Navigation />
+
     </div>
   )
 }

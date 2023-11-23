@@ -2,16 +2,16 @@ import svgAddUser from '../../assets/icons/plus-square-fill.svg'
 import svgGrenage from '../../assets/icons/gear-fill.svg'
 import svgSearch from '../../assets/icons/search.svg'
 import imgGitAnonimus from '../../assets/img/img-git-Anonimo.jpg'
+import svgNotification from '../../assets/icons/app-indicator.svg'
 import useScript from './script'
 import useDataToken from '../select-users/script'
 
-
-
 export default function Navigation() {
+
     const {
         search,
         handleSearch,
-        handlePesquisarAmigo,
+        handlePesquisarUsuario,
         resultadoPesquisa,
         handleEnviarSolicitacaoAmizade,
         menssageResults,
@@ -20,6 +20,8 @@ export default function Navigation() {
 
     const {
         userData,
+        oppenListSolicitacoes,
+        solicitacoes
     } = useDataToken()
 
     return (
@@ -46,7 +48,9 @@ export default function Navigation() {
                             ))}
                             {menssageResults && (
                                 <div className='mensage-results'>
-                                    <p>{menssageResults}</p>
+                                    <div className='text-results'>
+                                        <p>{menssageResults}</p>
+                                    </div>
                                 </div>
                             )}
                         </div>
@@ -54,35 +58,46 @@ export default function Navigation() {
                 </div>
 
                 <div className='search-imput'>
-                    {/* input pesquisar */}
 
-                    <input type="text" id='pesquisar-amigo' placeholder='Pesquisar Amigo!' />
+                    <div className='div-input'>
+                        <input type="text" id='pesquisar-amigo' placeholder='Pesquisar Amigo!' />
+                    </div>
 
-                    {/* input pesquisar */}
-
-                    <div className='img-search' onClick={handlePesquisarAmigo}>
+                    <div className='img-search' onClick={handlePesquisarUsuario}>
                         <img src={svgSearch} alt="img-search" />
                     </div>
                 </div>
             </div>
+
+            <div className={`area-solicitacoes-amizades ${solicitacoes ? 'active-area-solicitacoes-amizades' : ''}`}>
+                <div className='text-mensagem'>
+                    <span>Sem solicitacoes de amizades!</span>
+                </div>
+            </div>
+
             <div className='navigation-profile'>
+
                 <div className="name-profile">
                     <span>Ola</span>
                     {userData && (
                         <p>{userData.nome}</p>
                     )}
                 </div>
+
                 <div className='grenage-add-user'>
                     <div className="grenage">
                         <img src={svgGrenage} alt="img-grenage" />
                     </div>
                     <div className='add-user'>
-                        <div className='text-new-user'>
+                        {/* <div className='text-new-user'>
                             <p>Novo Amigo</p>
-                        </div>
+                        </div> */}
                         <div className='img-add-user'>
-                            <img src={svgAddUser} alt="img-add-user" onClick={handleSearch}/>
+                            <img src={svgAddUser} alt="img-add-user" onClick={handleSearch} />
                         </div>
+                    </div>
+                    <div className='img-solicitacoes' onClick={oppenListSolicitacoes}>
+                        <img src={svgNotification} alt="" />
                     </div>
                 </div>
             </div>

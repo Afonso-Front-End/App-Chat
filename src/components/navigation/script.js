@@ -1,46 +1,15 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import useDataToken from "../select-users/script";
 
 export default function useScript() {
   const [search, setSearch] = useState(false)
   const [resultadoPesquisa, setResultadoPesquisa] = useState(null);
-  const [listaAmizades, setListaAmizades] = useState([]);
   const [mensagemAviso, setMensagemAviso] = useState(true)
   const [menssageResults, setMenssageResults] = useState(false)
 
-  const { userData, token } = useDataToken()
+  const { userData } = useDataToken()
 
-  const handleListarAmizades = useCallback(async () => {
-    try {
-      const resposta = await fetch('https://api-planetscale-fawn.vercel.app/lista-de-amizades', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      if (resposta.ok) {
-        const dados = await resposta.json();
-        setListaAmizades(dados.amigos);
-
-        setMensagemAviso(dados.amigos.length === 0);
-      } else { }
-    } catch {
-
-    }
-  }, [token]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (token) {
-        await handleListarAmizades();
-      }
-    };
-
-    fetchData();
-  }, [handleListarAmizades, token]);
-
-  const handlePesquisarAmigo = async () => {
+  const handlePesquisarUsuario = async () => {
     const inputPesquisa = document.getElementById('pesquisar-amigo');
     const usuario_identifier = inputPesquisa.value;
 
@@ -94,11 +63,6 @@ export default function useScript() {
     }
   };
   
-
-
-
-
-
   
   const handleSearch = () => {
     setSearch(!search)
@@ -108,9 +72,8 @@ export default function useScript() {
     handleSearch,
     search,
     resultadoPesquisa,
-    handlePesquisarAmigo,
+    handlePesquisarUsuario,
     handleEnviarSolicitacaoAmizade,
-    listaAmizades,
     mensagemAviso,
     menssageResults,
   }

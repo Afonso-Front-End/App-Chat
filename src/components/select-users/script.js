@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
-export default function useDataToken(){
-    const [token, setToken] = useState('');
-    const [userData, setUserData] = useState(null)
-    
+export default function useDataToken() {
+  const [token, setToken] = useState('');
+  const [userData, setUserData] = useState(null)
+
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const tokenFromURL = urlParams.get('token');
@@ -18,9 +19,19 @@ export default function useDataToken(){
       setUserData(decodedToken)
     }
   }, [token]);
+  
+  const [solicitacoes, setSolicitacoes] = useState(false)
 
-  return{
+ 
+  const oppenListSolicitacoes = () => {
+    setSolicitacoes(!solicitacoes);
+
+  }
+
+  return {
     userData,
     token,
+    oppenListSolicitacoes,
+    solicitacoes
   }
 }

@@ -37,6 +37,10 @@
     overflow-x: hidden;
     height: 100%;
     padding: 0 0.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .items-users .user {
@@ -147,10 +151,18 @@
     padding: 0.5rem 0.5rem;
 }
 
-.input {
+.div-input {
     width: 100%;
     height: 100%;
     background-color: #C7C8CC;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.input {
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     overflow: hidden;
     display: flex;
@@ -237,11 +249,11 @@
 /* Navigation */
 
 .navigation {
-    padding: 0 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #202020;
+    position: relative;
 }
 
 .navigation-profile {
@@ -250,6 +262,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 0.5rem;
 }
 
 .name-profile {
@@ -277,6 +290,13 @@
 .active-grenage {
     transition: 0.5s;
     transform: rotate(360deg);
+}
+
+.img-solicitacoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
 }
 
 .add-user {
@@ -328,6 +348,7 @@
     z-index: -1;
     opacity: 0;
     transition: 0.2s;
+    padding: 0 0.5rem;
 }
 
 .active-container-search {
@@ -338,10 +359,10 @@
 }
 
 .search-imput {
+    width: 100%;
     height: 60px;
     display: flex;
-    align-items: center;
-    padding-top: 0.5rem;
+    padding: 0 0.5rem;
 }
 
 .search-imput input {
@@ -351,8 +372,6 @@
     border: none;
     color: #000;
     outline: none;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
     padding: 0 0.3rem;
     font-size: 15px;
     font-weight: 500;
@@ -377,16 +396,12 @@
 }
 
 
-.results{
-    overflow: hidden;
-    border-radius: 4px;
-    position: absolute;
-    top: -85px;
-    background-color: #C7C8CC;
-}
+
+
 .results:hover {
     background-color: #808182;
 }
+
 .results-img-user {
     width: 70px;
     height: 60px;
@@ -401,33 +416,53 @@
     display: flex;
     gap: 10px;
     padding: 0.5rem 0.5rem;
+    overflow: hidden;
+    border-radius: 4px;
+    position: absolute;
+    top: -90px;
+    background-color: #C7C8CC;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .results-name-user span,
 .results-mensage-user p {
     color: #000;
 }
-.results-name-user span{
+
+.results-name-user span {
     font-weight: 400;
     font-size: 20px;
 }
+
 .results-mensage-user p {
     font-size: 13px;
 }
 
-.mensage-results{
+.mensage-results {
+    width: 100%;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: -50px;
+    top: -55px;
+    padding: 0 0.5rem;
+}
+
+.mensage-results .text-results{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     background-color: #808182;
+    height: 50px;
+    border-radius: 4px;
 }
 .mensage-results p {
     color: #000;
 }
+
 /* mensagem-aviso */
 .mensagem-aviso {
     display: flex;
@@ -437,6 +472,7 @@
     height: 100%;
     position: relative;
 }
+
 .mensagem-aviso .img-mensagem-aviso {
     width: 100%;
     height: 400px;
@@ -444,11 +480,13 @@
     border-radius: 4px;
     overflow: hidden;
 }
-.mensagem-aviso .img-mensagem-aviso img{
+
+.mensagem-aviso .img-mensagem-aviso img {
     width: 100%;
     height: 100%;
 }
-.mensagem-aviso .img-mensagem-aviso span{
+
+.mensagem-aviso .img-mensagem-aviso span {
     content: '';
     display: block;
     width: 100%;
@@ -457,6 +495,36 @@
     position: absolute;
     top: 0;
 }
+
 .mensagem-aviso .mensage-aviso {
     position: absolute;
+}
+
+/* area-solicitacoes-amizades */
+.area-solicitacoes-amizades {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    bottom: 100px;
+    opacity: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    padding: 0 0.5rem;
+}
+
+.active-area-solicitacoes-amizades {
+    transform: translateX(0%);
+    opacity: 1;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.text-mensagem {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #221E1F;
 }
