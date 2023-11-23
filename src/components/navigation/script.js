@@ -30,7 +30,6 @@ export default function useScript() {
     }
   }, [token]);
 
-
   useEffect(() => {
     const fetchData = async () => {
       if (token) {
@@ -96,36 +95,11 @@ export default function useScript() {
   };
   
 
-  // const handleAdicionarAmigo = async () => {
-  //   // Certifique-se de que há um resultado de pesquisa antes de tentar adicionar
-  //   if (resultadoPesquisa) {
-  //     const { usuario_identifier } = resultadoPesquisa[0]; // usuário que está sendo adicionado como amigo
 
-  //     try {
-  //       // Você precisa obter o usuario_identifier do usuário logado, pode ser obtido de onde você armazena no seu estado.
-  //       const usuarioLogado = userData.usuario_identifier; // Substitua isso pelo usuário logado
 
-  //       const resposta = await fetch('https://api-planetscale-fawn.vercel.app/adicionar-usuario', {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify({ usuario_identifier: usuarioLogado, amigo_identifier: usuario_identifier }),
-  //       });
 
-  //       if (resposta.ok) {
-  //         console.log('Amigo adicionado com sucesso!');
-  //         // Limpar o resultado da pesquisa após a adição bem-sucedida, se desejar
-  //         setResultadoPesquisa(null);
-  //       } else {
-  //         console.error('Erro ao adicionar amigo:', resposta.statusText);
-  //       }
-  //     } catch (erro) {
-  //       console.error('Erro de rede ao adicionar amigo:', erro);
-  //     }
-  //   }
-  // };
 
+  
   const handleSearch = () => {
     setSearch(!search)
   }
