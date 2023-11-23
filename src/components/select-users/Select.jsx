@@ -3,7 +3,7 @@ import imgGitAnonimus from '../../assets/img/img-git-Anonimo.jpg'
 import Navigation from '../navigation/Navigation'
 import useScript from '../navigation/script';
 export default function Select() {
-  const { listaAmizades }= useScript()
+  const { listaAmizades, mensagemAviso }= useScript()
 
   return (
     <div className="area-select-user">
@@ -20,6 +20,7 @@ export default function Select() {
             </div>
           </li>
         ))}
+        {mensagemAviso && (
           <div className='mensagem-aviso'>
                 <div className="img-mensagem-aviso">
                   <img src={imgGitAnonimus} alt="" />
@@ -27,7 +28,7 @@ export default function Select() {
                 </div>
                 <div className="mensage-aviso"><p>Nenhuma amizade encontrada.</p></div>
           </div>
-        
+        )}
       </ul>
       <Navigation />
     </div>
