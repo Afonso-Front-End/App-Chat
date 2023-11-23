@@ -21,6 +21,7 @@ export default function useScript() {
       if (resposta.ok) {
         const dados = await resposta.json();
         setListaAmizades(dados.amigos);
+        setMensagemAviso(false);
       } else {
         console.error('Erro ao listar amizades:', resposta.statusText);
       }
