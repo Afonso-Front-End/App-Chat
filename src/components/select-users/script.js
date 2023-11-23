@@ -4,7 +4,7 @@ import {jwtDecode} from 'jwt-decode';
 export default function useDataToken(){
     const [token, setToken] = useState('');
     const [userData, setUserData] = useState(null)
-
+    
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const tokenFromURL = urlParams.get('token');
@@ -16,11 +16,11 @@ export default function useDataToken(){
       // Decodificar o token JWT
       const decodedToken = jwtDecode(tokenFromURL);
       setUserData(decodedToken)
-     
     }
   }, [token]);
 
   return{
     userData,
+    token,
   }
 }

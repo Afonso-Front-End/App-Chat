@@ -1,8 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect , useCallback} from "react";
+import useDataToken from "../select-users/script";
 
 export default function useScript() {
   const [search, setSearch] = useState(false)
   const [resultadoPesquisa, setResultadoPesquisa] = useState(null);
+  const [listaAmizades, setListaAmizades] = useState([]);
+
+  const { userData, token } = useDataToken()
+
+  const handleListarAmizades = useCallback(async () => {
+    try {
+      const resposta = await fetch('https://api-planetscale-fawn.vercel.app/lista-de-amizades', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (resposta.ok) {
+        const dados = await resposta.json();
+        setListaAmizades(dados.amigos);
+      } else {
+        console.error('Erro ao listar amizades:', resposta.statusText);
+      }
+    } catch (erro) {
+      console.error('Erro de rede ao listar amizades:', erro);
+    }
+  }, [token]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (token) {
+        await handleListarAmizades();
+      }
+    };
+
+    fetchData();
+  }, [handleListarAmizades, token]);
 
   const handlePesquisarAmigo = async () => {
     const inputPesquisa = document.getElementById('pesquisar-amigo');
@@ -10,7 +44,7 @@ export default function useScript() {
     try {
       const resposta = await fetch(`https://api-planetscale-fawn.vercel.app/buscar-usuario/${usuario_identifier}`);
       const dados = await resposta.json();
-  
+
       if (resposta.ok) {
         setResultadoPesquisa(dados.usuario);
       } else {
@@ -19,7 +53,7 @@ export default function useScript() {
       }
     } catch (erro) {
       console.error('Erro ao pesquisar amigo:', erro);
-  
+
       if (erro instanceof TypeError && erro.message === 'Failed to fetch') {
 
         console.error('Erro de rede ao pesquisar amigo:', erro);
@@ -28,15 +62,16 @@ export default function useScript() {
       }
     }
   }
+
   const handleAdicionarAmigo = async () => {
     // Certifique-se de que há um resultado de pesquisa antes de tentar adicionar
     if (resultadoPesquisa) {
       const { usuario_identifier } = resultadoPesquisa[0]; // usuário que está sendo adicionado como amigo
-  
+
       try {
         // Você precisa obter o usuario_identifier do usuário logado, pode ser obtido de onde você armazena no seu estado.
-        const usuarioLogado = "Afonso@0f0d2268-28e3-4f95-8716-337e0d30c3bf"; // Substitua isso pelo usuário logado
-  
+        const usuarioLogado = userData.usuario_identifier; // Substitua isso pelo usuário logado
+
         const resposta = await fetch('https://api-planetscale-fawn.vercel.app/adicionar-usuario', {
           method: 'POST',
           headers: {
@@ -44,7 +79,7 @@ export default function useScript() {
           },
           body: JSON.stringify({ usuario_identifier: usuarioLogado, amigo_identifier: usuario_identifier }),
         });
-  
+
         if (resposta.ok) {
           console.log('Amigo adicionado com sucesso!');
           // Limpar o resultado da pesquisa após a adição bem-sucedida, se desejar
@@ -57,7 +92,9 @@ export default function useScript() {
       }
     }
   };
-  
+
+
+
 
   const handleSearch = () => {
     setSearch(!search)
@@ -68,6 +105,7 @@ export default function useScript() {
     search,
     resultadoPesquisa,
     handlePesquisarAmigo,
-    handleAdicionarAmigo
+    handleAdicionarAmigo,
+    listaAmizades,
   }
 }

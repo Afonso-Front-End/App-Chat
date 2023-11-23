@@ -373,8 +373,12 @@
 .container-results {
     background-color: #C7C8CC;
     border-radius: 4px;
+    cursor: grab;
 }
 
+.container-results:hover{
+    background-color: #808182;
+}
 .results-img-user {
     width: 70px;
     height: 60px;
