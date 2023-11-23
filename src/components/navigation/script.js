@@ -24,8 +24,8 @@ export default function useScript() {
         
         setMensagemAviso(dados.amigos.length === 0);
       } else { }
-    } catch (erro) {
-      console.error('Erro de rede ao listar amizades:', erro);
+    } catch{
+      
     }
   }, [token]);
   
