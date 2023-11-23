@@ -149,6 +149,8 @@
     width: 100%;
     height: 100%;
     padding: 0.5rem 0.5rem;
+    display: flex;
+    
 }
 
 .div-input {
@@ -174,6 +176,7 @@
     align-items: center;
     justify-content: center;
     cursor: grab;
+    background-color: #f1f1f1;
 }
 
 .img-send img {
@@ -186,7 +189,6 @@
     outline: none;
     width: 100%;
     height: 100%;
-    background-color: transparent;
     color: #000;
     padding: 0 0.5rem;
 }
@@ -504,8 +506,8 @@
 .area-solicitacoes-amizades {
     position: absolute;
     width: 100%;
-    height: 200px;
-    bottom: 100px;
+    height: calc(100vh - 110px);
+    bottom: 70px;
     opacity: 0;
     overflow-y: auto;
     overflow-x: hidden;
