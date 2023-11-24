@@ -1,4 +1,4 @@
-import ChatMensage from "./components/chat/Conversa.jsx";
+import ChatMensage from "./components/chat/Chat.js";
 import Lista from "./components/lista/Lista.js";
 
 
