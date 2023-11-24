@@ -1,6 +1,6 @@
 import React from 'react';
 import imgGitAnonimus from '../../assets/img/img-git-Anonimo.jpg'
-import Navigation from '../menu/menu'
+import Menu from '../menu/Menu'
 import useScript from '../menu/script'; /* script navigation/script */
 
 export default function Select() {
@@ -38,7 +38,7 @@ export default function Select() {
         )}
       </ul>
 
-      <Navigation />
+      <Menu />
 
     </div>
   )

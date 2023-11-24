@@ -1,5 +1,5 @@
-import Chat from "./components/chat/chat";
-import Lista from "./components/lista/lista";
+import Chat from "./components/chat/Chat";
+import Lista from "./components/lista/Lista";
 
 
 export default function App() {
