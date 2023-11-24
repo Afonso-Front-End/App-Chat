@@ -1,20 +1,19 @@
 import { useState } from "react";
-import useDataToken from "../select-users/script";
+import useDataToken from "../lista/script";
 
 export default function useScript() {
-  const [search, setSearch] = useState(false)
   const [resultadoPesquisa, setResultadoPesquisa] = useState(null);
-  const [mensagemAviso, setMensagemAviso] = useState(true)
-  const [menssageResults, setMenssageResults] = useState(false)
+  const [WallperMensage, setWallperMensage] = useState(true)
+  const [menssageResults, setMenssageResults] = useState('Pequise pelo indetificador!')
 
   const { userData } = useDataToken()
 
   const handlePesquisarUsuario = async () => {
-    const inputPesquisa = document.getElementById('pesquisar-amigo');
+    const inputPesquisa = document.getElementById('pesquisar-usuario');
     const usuario_identifier = inputPesquisa.value;
 
     if (inputPesquisa.value === '') {
-      console.log('Digite algo.');
+      setMenssageResults('Digite algo!')
     } else {
       try {
         const resposta = await fetch(`https://api-planetscale-fawn.vercel.app/buscar-usuario/${usuario_identifier}`);
@@ -63,18 +62,11 @@ export default function useScript() {
     }
   };
   
-  
-  const handleSearch = () => {
-    setSearch(!search)
-  }
-
   return {
-    handleSearch,
-    search,
     resultadoPesquisa,
     handlePesquisarUsuario,
     handleEnviarSolicitacaoAmizade,
-    mensagemAviso,
+    WallperMensage,
     menssageResults,
   }
 }

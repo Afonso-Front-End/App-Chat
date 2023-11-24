@@ -1,13 +1,13 @@
-import Conversa from "./components/area-conversa/Conversa";
-import Select from "./components/select-users/Select";
+import Chat from "./components/chat/chat";
+import Lista from "./components/lista/lista";
 
 
 export default function App() {
     return (
         <div className="container">
             <div className="content">
-                <Select/>
-                <Conversa/>
+                <Lista/>
+                <Chat/>
             </div>
         </div>
     )
