@@ -68,5 +68,6 @@ export default function useScript() {
     handleEnviarSolicitacaoAmizade,
     WallperMensage,
     menssageResults,
+    setWallperMensage
   }
 }
