@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useDataToken from "../lista/script";
 
 export default function useScript() {
@@ -6,7 +6,7 @@ export default function useScript() {
   const [WallperMensage, setWallperMensage] = useState(true)
   const [menssageResults, setMenssageResults] = useState('Pequise pelo indetificador!')
 
-  const { userData } = useDataToken()
+  const { userData, token } = useDataToken()
 
   const handlePesquisarUsuario = async () => {
     const inputPesquisa = document.getElementById('pesquisar-usuario');
@@ -36,11 +36,11 @@ export default function useScript() {
     // Certifique-se de que há um resultado de pesquisa antes de tentar enviar a solicitação
     if (resultadoPesquisa) {
       const { usuario_identifier } = resultadoPesquisa[0]; // usuário que está sendo enviado a solicitação de amizade
-  
+
       try {
         // Você precisa obter o usuario_identifier do usuário logado, pode ser obtido de onde você armazena no seu estado.
         const remetente_identifier = userData.usuario_identifier; // Substitua isso pelo usuário logado
-  
+
         const resposta = await fetch('https://api-planetscale-fawn.vercel.app/enviar-solicitacao-amizade', {
           method: 'POST',
           headers: {
@@ -48,7 +48,7 @@ export default function useScript() {
           },
           body: JSON.stringify({ remetente_identifier, destinatario_identifier: usuario_identifier }),
         });
-  
+
         if (resposta.ok) {
           console.log('Solicitação de amizade enviada com sucesso!');
           // Limpar o resultado da pesquisa após o envio bem-sucedido, se desejar
@@ -61,7 +61,33 @@ export default function useScript() {
       }
     }
   };
-  
+
+  const [listaSolicitacoesPendentes, setListaSolicitacoesPendentes] = useState([]);
+  useEffect(() => {
+    fetch('https://api-planetscale-fawn.vercel.app/solicitacoes-pendentes', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Não autorizado');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.solicitacoesPendentes) {
+          setListaSolicitacoesPendentes(data.solicitacoesPendentes);
+        } else {
+          console.log(data.message);
+        }
+      })
+      .catch(() => { });
+  }, [token]);
+
+  console.log(listaSolicitacoesPendentes);
+
   return {
     resultadoPesquisa,
     handlePesquisarUsuario,
