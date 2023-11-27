@@ -1,12 +1,11 @@
 import ChatMensage from "./components/chat/Chat.js";
-import Lista from "./components/lista/Lista.js";
-
+import Menu from "./components/menu/Menu.js";
 
 export default function App() {
     return (
         <div className="container">
             <div className="content">
-                <Lista/>
+                <Menu/>
                 <ChatMensage/>
             </div>
         </div>

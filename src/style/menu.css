@@ -47,7 +47,6 @@
     width: 100%;
     display: flex;
     align-items: center;
-
 }
 
 .data-usuario-logado {
@@ -59,11 +58,9 @@
 
 .container-nav {
     width: inherit;
+    width: 40%;
 }
 
-.content-nav {
-    width: inherit;
-}
 
 .nav-btns {
     display: flex;
@@ -181,6 +178,9 @@
     position: relative;
     padding: 0 0.5rem;
 }
+.content-lista-usuarios-pendentes::-webkit-scrollbar{
+    width: 0;
+}
 .content-lista-usuarios-pendentes > span{
     line-height: 60px;
     text-align: center;
@@ -209,9 +209,11 @@
     width: 70px;
     height: inherit;
 }
+
 .info-usuario-lista span,
 .info-usuario-lista  p{
     color: #000;
+    margin-left: 10px;
 }
 .mensage-lista-usuario-pedente {
     display: flex;
@@ -220,7 +222,7 @@
     height: 100%;
     position: absolute;
     width: 100%;
-    display: none; /**importante**/
+    /* display: none; *importante* */
 }
 .btn-aceitar-recusar {
     height: inherit;

@@ -36,12 +36,16 @@
 .data-info-usuario , 
 .data-info-usuario-logado {
     height: 80px;
-    width: 100%;
+    width: 80%;
     display: flex;
     align-items: center;
     gap: 5px;
 }
-
+.data-info-info-usuario-logado {
+    height: 100%;
+    padding: 0.5rem 0;
+    width: inherit;
+}
 .data-info-img-usuario, 
 .data-img-usuario-logado {
     width: 70px;

@@ -1,16 +1,9 @@
 import imgGitAnonimus from '../../assets/img/img-git-Anonimo.jpg'
 import svgSend from '../../assets/icons/send-fill.svg'
 
-import useScript from './script'
-export default function Conversa() {
-    const {
-        handleInputChange,
-        inputValue,
-        handleSendMessage,
-        mensagens,
-        imgSend
 
-    } = useScript()
+export default function Conversa() {
+    
     return (
         <div className="container-chat">
             <div className='content-chat'>
@@ -29,30 +22,29 @@ export default function Conversa() {
                         </div>
                     </div>
                 </div>
- 
+
                 <div className='chat'>
                     <div className='chat-mensage'>
                         <div className="message received">
                             <p>Esta é uma mensagem recebida</p>
                         </div>
-                        {mensagens && mensagens.map((mensagem, index) => (
-                            <div className="message sent" key={index}>
-                                <p>{mensagem}</p>
-                            </div>
-                        ))}
+
+                        <div className="message sent" >
+                            <p>Esta é uma mensagem enviada</p>
+                        </div>
+
                     </div>
                 </div>
-
 
                 <div className='container-input-mensage-chat'>
                     <div className='content-input-mensage-chat'>
                         <div className='input-mensage-chat'>
-                            <input type="text" id='text-mensagem' placeholder='Mensagem' value={inputValue} onChange={handleInputChange} />
-                            {imgSend && (
-                                <div className='img-send'>
-                                    <img src={svgSend} alt="img-enviar" onClick={handleSendMessage} />
-                                </div>
-                            )}
+                            <input type="text" id='text-mensagem' placeholder='Mensagem' />
+
+                            <div className='img-send'>
+                                <img src={svgSend} alt="img-enviar" />
+                            </div>
+
                         </div>
                     </div>
                 </div>
