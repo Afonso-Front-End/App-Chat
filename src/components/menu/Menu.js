@@ -8,8 +8,8 @@ import ListUsers from '../../scripts/listUsers';
 
 export default function Menu() {
     const { TOKENDECODIFICADO } = DataToken()
-    const { handleActive, Active } = ListUsers()
-  
+    const { handleActive, Active, searchQuery, setSearchQuery, handleSearch, searchResults, msgSearchResults,} = ListUsers()
+
     return (
         <div className="container-lista-amizades">
             <ul className="content-lista-amizades">
@@ -73,21 +73,31 @@ export default function Menu() {
 
                             <div className='content-resultados-da-pesquisa'>
 
-                                <div className='resultado-perfil'>
-                                    <div className="resultado-perfil-img">
-                                        <img src={imgGitAnonimus} alt="img-user" />
-                                    </div>
+                                {Array.isArray(searchResults) && searchResults.map((results) => (
+                                    <div className='resultado-perfil' key={results}>
+                                        <div className="resultado-perfil-img">
+                                            <img src={imgGitAnonimus} alt="img-user" />
+                                        </div>
 
-                                    <div className="resultado-info-perfil">
-                                        <span>USUARIO: </span>
-                                        <p>INDENTIFICADOR: </p>
-                                        <p>ID: </p>
-                                    </div>
-                                </div>
+                                        <div className="resultado-info-perfil">
+                                            <span>{results.nome}</span>
+                                            <p>{results.identifier}</p>
+                                            <p>{results.email}</p>
+                                        </div>
 
-                                <div className='resultado-pesquisa'>
-                                    <p></p>
-                                </div>
+                                        <button>
+                                            +
+                                        </button>
+                                    </div>
+                                ))}
+
+
+                                {msgSearchResults && (
+                                    <div className='resultado-pesquisa'>
+                                        <p>{msgSearchResults}</p>
+                                    </div>
+                                )}
+
 
 
                             </div>
@@ -95,11 +105,11 @@ export default function Menu() {
                             <div className='container-imput-pesquisar'>
 
                                 <div className='content-imput-pesquisar'>
-                                    <input type="text" id='pesquisar-usuario' placeholder='Pesquisar Amigo!' />
+                                    <input type="text" id='pesquisar-usuario' placeholder='Pesquisar Usuario!' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                                 </div>
 
                                 <div className='content-img-pesquisar' >
-                                    <img src={svgSearch} alt="img-search" />
+                                    <img src={svgSearch} alt="img-search" onClick={handleSearch} />
                                 </div>
 
                             </div>
