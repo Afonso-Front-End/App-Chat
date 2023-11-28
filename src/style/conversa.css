@@ -3,7 +3,7 @@
     width: calc(100% - 400px);
     height: 100%;
     overflow: hidden;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem 0;
     background-color: #221E1F;
 }
 

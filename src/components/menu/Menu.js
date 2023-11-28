@@ -3,10 +3,11 @@ import imgGitAnonimus from '../../assets/img/img-git-Anonimo.jpg'
 import svgGrenage from '../../assets/icons/gear-fill.svg'
 import svgSearch from '../../assets/icons/search.svg'
 import svgNotification from '../../assets/icons/app-indicator.svg'
-
+import DataToken from '../../scripts/dataToken';
 
 export default function Menu() {
-
+    const { TOKENDECODIFICADO } = DataToken()
+    console.log(TOKENDECODIFICADO)
     return (
         <div className="container-lista-amizades">
             <ul className="content-lista-amizades">
@@ -31,16 +32,15 @@ export default function Menu() {
 
                         <div className='background-walper-img'>
                             <div className="wallper-mensage-text">
-                                <span>Nenhuma amizade encontrada!</span>
+                                <div>
+                                    <span>Nenhuma amizade encontrada!</span>
+                                </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
 
-            </ul>
-
-            <menu className='container-menu'>
                 <div className="container-lista-usuarios-pendentes">
                     <div className='content-lista-usuarios-pendentes'>
                         <span>Solicitacoe de amizades pendentes!</span>
@@ -65,9 +65,7 @@ export default function Menu() {
                         </div>
 
                     </div>
-                </div>
 
-                <div className='content-menu'>
                     <div className='container-pequisar-usuario'>
                         <div className='content-pequisar-usuario'>
 
@@ -105,17 +103,27 @@ export default function Menu() {
                             </div>
                         </div>
                     </div>
+                </div>
+
+            </ul>
+
+            <menu className='container-menu'>
+                <div className='content-menu'>
+
 
                     <div className='nav-menu'>
 
                         <div className="container-data-usuario-logado">
                             <div className='content-data-usuario-logado'>
+
+                                {/* { Informacoes do usuario Logado} */}
                                 <div className='data-info-usuario-logado'>
                                     <div className='data-img-usuario-logado'>
                                         <img src={imgGitAnonimus} alt="Usuario logado" />
                                     </div>
                                     <div className='data-info-info-usuario-logado'>
-                                        <p>nome</p>
+                                        <p>{TOKENDECODIFICADO.nome}</p>
+                                        <p>{TOKENDECODIFICADO.email}</p>
                                     </div>
                                 </div>
 
@@ -135,7 +143,7 @@ export default function Menu() {
 
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </menu>

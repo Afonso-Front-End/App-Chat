@@ -12,15 +12,16 @@
     padding: 0.2rem 0.5rem;
     display: flex;
     flex-direction: column;
-
+    background-color: #1d1a1b;
 }
 
-.container-pequisar-usuario{
+.container-pequisar-usuario {
     padding: 0.4rem 0.3rem;
     background-color: #1d1a1b;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
+
 .content-pequisar-usuario {
     height: 200px;
     display: flex;
@@ -35,12 +36,12 @@
     justify-content: space-between;
     align-items: center;
     background-color: #1d1a1b;
+    /* background-color: #ea0c56; */
     border-radius: 4px;
 }
 
 .container-data-usuario-logado {
     width: 100%;
-    padding: 0.3rem 0.4rem;
 }
 
 .content-data-usuario-logado {
@@ -100,6 +101,7 @@
     font-weight: 500;
     padding: 0 0.5rem;
 }
+
 .content-imput-pesquisar {
     width: inherit;
     height: inherit;
@@ -125,6 +127,7 @@
 .content-resultados-da-pesquisa {
     height: 100%;
 }
+
 .resultado-perfil {
     display: flex;
     gap: 5px;
@@ -141,10 +144,12 @@
     align-items: center;
     justify-content: center;
 }
-.resultado-perfil-img img{
+
+.resultado-perfil-img img {
     width: 70px;
     height: inherit;
 }
+
 .resultado-pesquisa {
     width: 100%;
     height: 100%;
@@ -158,18 +163,22 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    top: -100%;
-    padding: 0 0.5rem;
+    padding: 0.5rem 0.5rem;
     transform: translateX(-100%);
+    background-color: #1d1a1b;
+    display: flex;
+    flex-direction: column;
 }
-.active-lista-usuarios-pendentes{
+
+.active-lista-usuarios-pendentes {
     transform: translateX(0);
-    transition:  transform 0.1s ease-in-out;
+    transition: transform 0.1s ease-in-out;
 }
+
 .content-lista-usuarios-pendentes {
     width: inherit;
     height: inherit;
-    background-color: #1d1a1b;
+    background-color: transparent;
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
@@ -178,13 +187,16 @@
     position: relative;
     padding: 0 0.5rem;
 }
-.content-lista-usuarios-pendentes::-webkit-scrollbar{
+
+.content-lista-usuarios-pendentes::-webkit-scrollbar {
     width: 0;
 }
-.content-lista-usuarios-pendentes > span{
+
+.content-lista-usuarios-pendentes>span {
     line-height: 60px;
     text-align: center;
 }
+
 .lista-usuarios-pendentes {
     background-color: #f1f1f1;
     height: 80px;
@@ -195,9 +207,11 @@
     gap: 10px;
     padding: 0 0.5rem;
 }
+
 .usuario-lita {
     display: flex;
 }
+
 .img-usuario-lista {
     width: 70px;
     display: flex;
@@ -205,16 +219,18 @@
     justify-content: center;
     padding: 0.2rem;
 }
-.img-usuario-lista img{
+
+.img-usuario-lista img {
     width: 70px;
     height: inherit;
 }
 
 .info-usuario-lista span,
-.info-usuario-lista  p{
+.info-usuario-lista p {
     color: #000;
     margin-left: 10px;
 }
+
 .mensage-lista-usuario-pedente {
     display: flex;
     align-items: center;
@@ -224,6 +240,7 @@
     width: 100%;
     /* display: none; *importante* */
 }
+
 .btn-aceitar-recusar {
     height: inherit;
     width: 80px;
@@ -233,18 +250,21 @@
     gap: 10px;
     overflow: hidden;
 }
-.btn-aceitar-recusar button{
+
+.btn-aceitar-recusar button {
     color: #000;
     cursor: pointer;
     padding: 0.3rem;
     border: none;
     border-radius: 4px;
 }
-.btn-aceitar-recusar button:nth-child(1){
+
+.btn-aceitar-recusar button:nth-child(1) {
     background-color: #0CF25D;
     color: #000;
 }
-.btn-aceitar-recusar button:nth-child(2){
+
+.btn-aceitar-recusar button:nth-child(2) {
     background-color: #D92525;
     color: #f1f1f1;
 }
