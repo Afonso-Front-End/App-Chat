@@ -4,10 +4,12 @@ import svgGrenage from '../../assets/icons/gear-fill.svg'
 import svgSearch from '../../assets/icons/search.svg'
 import svgNotification from '../../assets/icons/app-indicator.svg'
 import DataToken from '../../scripts/dataToken';
+import ListUsers from '../../scripts/listUsers';
 
 export default function Menu() {
     const { TOKENDECODIFICADO } = DataToken()
-    console.log(TOKENDECODIFICADO)
+    const { handleActive, Active } = ListUsers()
+  
     return (
         <div className="container-lista-amizades">
             <ul className="content-lista-amizades">
@@ -41,7 +43,7 @@ export default function Menu() {
                     </div>
                 </div>
 
-                <div className="container-lista-usuarios-pendentes">
+                <div className={`container-lista-usuarios-pendentes ${Active ? 'activeListaUsuarios' : ''}`}>
                     <div className='content-lista-usuarios-pendentes'>
                         <span>Solicitacoe de amizades pendentes!</span>
                         <div className='lista-usuarios-pendentes usuario-pendente' >
@@ -134,7 +136,7 @@ export default function Menu() {
                                                 <img src={svgGrenage} alt="img-grenage" />
                                             </div>
 
-                                            <div className="nav-btn-img">
+                                            <div className={`nav-btn-img ${Active ? 'nav-btn-img activeNavBtnImg' : ''}`} onClick={handleActive}>
                                                 <img src={svgNotification} alt="" />
                                             </div>
                                         </div>

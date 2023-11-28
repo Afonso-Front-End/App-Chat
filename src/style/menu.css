@@ -79,7 +79,7 @@
     border-radius: 5px;
 }
 
-.active-nav-btn-img {
+.activeNavBtnImg {
     transform: scale(0.8);
 }
 
@@ -168,11 +168,11 @@
     background-color: #1d1a1b;
     display: flex;
     flex-direction: column;
+    transition: transform 0.1s ease-in-out;
 }
 
-.active-lista-usuarios-pendentes {
+.activeListaUsuarios {
     transform: translateX(0);
-    transition: transform 0.1s ease-in-out;
 }
 
 .content-lista-usuarios-pendentes {

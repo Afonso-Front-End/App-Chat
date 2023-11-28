@@ -34,7 +34,7 @@ export default function DataToken() {
 
         setTOKENDECODIFICADO(tokenDecodificado);
         setTOKEN(token)
-
+        
     }, []);
 
     return {
