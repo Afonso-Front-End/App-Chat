@@ -8,7 +8,7 @@ import ListUsers from '../../scripts/listUsers';
 
 export default function Menu() {
     const { TOKENDECODIFICADO } = DataToken()
-    const { handleActive, Active, searchQuery, setSearchQuery, handleSearch, searchResults, msgSearchResults,} = ListUsers()
+    const { handleActive, Active, searchQuery, setSearchQuery, handleSearch, searchResults, msgSearchResults, sendFriendRequest, loading, listUsersPending } = ListUsers()
 
     return (
         <div className="container-lista-amizades">
@@ -46,21 +46,23 @@ export default function Menu() {
                 <div className={`container-lista-usuarios-pendentes ${Active ? 'activeListaUsuarios' : ''}`}>
                     <div className='content-lista-usuarios-pendentes'>
                         <span>Solicitacoe de amizades pendentes!</span>
-                        <div className='lista-usuarios-pendentes usuario-pendente' >
-                            <div className='usuario-lita usuario-lista'>
-                                <div className="img-usuario-lista">
-                                    <img src={imgGitAnonimus} alt="img-user" />
+                        {listUsersPending && listUsersPending.map((users, index) => (
+                            <div className='lista-usuarios-pendentes usuario-pendente' key={index}>
+                                <div className='usuario-lita usuario-lista'>
+                                    <div className="img-usuario-lista">
+                                        <img src={imgGitAnonimus} alt="img-user" />
+                                    </div>
+                                    <div className="info-usuario-lista">
+                                        <span>{users.user.name}</span>
+                                        <p>{users.user.identifier}</p>
+                                    </div>
                                 </div>
-                                <div className="info-usuario-lista">
-                                    <span>USUARIO: nome</span>
-                                    <p>mensage</p>
+                                <div className='btn-aceitar-recusar'>
+                                    <button >Aceitar</button>
+                                    <button>Recusar</button>
                                 </div>
                             </div>
-                            <div className='btn-aceitar-recusar'>
-                                <button >Aceitar</button>
-                                <button>Recusar</button>
-                            </div>
-                        </div>
+                        ))}
 
                         <div className='mensage-lista-usuario-pedente'>
                             <span>Sem solicitacoes de amizades!</span>
@@ -74,7 +76,7 @@ export default function Menu() {
                             <div className='content-resultados-da-pesquisa'>
 
                                 {Array.isArray(searchResults) && searchResults.map((results) => (
-                                    <div className='resultado-perfil' key={results}>
+                                    <div className='resultado-perfil' key={results} >
                                         <div className="resultado-perfil-img">
                                             <img src={imgGitAnonimus} alt="img-user" />
                                         </div>
@@ -85,12 +87,11 @@ export default function Menu() {
                                             <p>{results.email}</p>
                                         </div>
 
-                                        <button>
+                                        <button onClick={() => sendFriendRequest(results.identifier)}>
                                             +
                                         </button>
                                     </div>
                                 ))}
-
 
                                 {msgSearchResults && (
                                     <div className='resultado-pesquisa'>
@@ -98,7 +99,13 @@ export default function Menu() {
                                     </div>
                                 )}
 
-
+                                {loading && (
+                                    <div className="loading-container">
+                                        <div className="ball"></div>
+                                        <div className="ball"></div>
+                                        <div className="ball"></div>
+                                    </div>
+                                )}
 
                             </div>
 
@@ -108,8 +115,8 @@ export default function Menu() {
                                     <input type="text" id='pesquisar-usuario' placeholder='Pesquisar Usuario!' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                                 </div>
 
-                                <div className='content-img-pesquisar' >
-                                    <img src={svgSearch} alt="img-search" onClick={handleSearch} />
+                                <div className='content-img-pesquisar' onClick={handleSearch}>
+                                    <img src={svgSearch} alt="img-search" />
                                 </div>
 
                             </div>

@@ -12,11 +12,9 @@ export default function DataToken() {
                     const decoded = jwtDecode(token);
                     return decoded;
                 } else {
-                    console.error("O token não é uma string válida:", token);
                     return null;
                 }
             } catch (error) {
-                console.error("Erro ao decodificar o token:", error);
                 return null;
             }
         };
