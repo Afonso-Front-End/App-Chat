@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import DataToken from "./dataToken";
-import io from 'socket.io-client';
 
-const socket = io('http://localhost:3001');
 
 const ListUsers = () => {
     const { TOKEN, TOKENDECODIFICADO } = DataToken();
@@ -68,7 +66,7 @@ const ListUsers = () => {
                     setSearchResults([]);
                     setSearchQuery("");
                     setMsgSearchResults('Solicitacao enviada com sucesso!');
-                    socket.emit('friendRequestSent', { friendIdentifier });
+
                 } else {
                     setMsgSearchResults('Ja enviado!');
                 }
@@ -93,12 +91,6 @@ const ListUsers = () => {
                 },
             });
 
-            socket.on('connect', () => {
-                const userId = TOKENDECODIFICADO.identifier; // Substitua pelo identificador real do usuário
-                socket.emit('registerUserId', userId);
-            });
-
-            console.log(response)
             if (response.ok) {
                 const data = await response.json();
                 if (data.success === true) {
@@ -117,26 +109,10 @@ const ListUsers = () => {
         }
     }, [TOKEN, TOKENDECODIFICADO]);
 
-    useEffect(() => {
-        const handleFriendRequestSent = () => {
-            fetchPendingRequests(); // ou qualquer outra lógica que você queira realizar
-        };
-
-        try {
-            if (socket.connected) {
-                socket.on('friendRequestSent', handleFriendRequestSent);
-            }
-        } catch (error) {
-            console.error('Erro ao ouvir eventos do Socket.io:', error);
-        }
-
-        return () => {
-            socket.off('friendRequestSent', handleFriendRequestSent);
-        };
-    }, [fetchPendingRequests]);
+    
 
     useEffect(() => {
-        fetchPendingRequests();
+        fetchPendingRequests();     
     }, [fetchPendingRequests]);
 
     return {
