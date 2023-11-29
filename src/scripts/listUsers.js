@@ -109,8 +109,6 @@ const ListUsers = () => {
         }
     }, [TOKEN, TOKENDECODIFICADO]);
 
-    
-
     useEffect(() => {
         fetchPendingRequests();     
     }, [fetchPendingRequests]);
