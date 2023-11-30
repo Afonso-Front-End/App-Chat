@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import DataToken from "./dataToken";
 
 import { io } from "socket.io-client";
-const socket = io('https://api-planetscale-9eq0wg2jd-afonsos-projects.vercel.app');
+const socket = io('https://api-planetscale-fawn.vercel.app');
 
 const ListUsers = () => {
     socket.on('connect', () => {
