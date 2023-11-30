@@ -8,6 +8,7 @@ const ListUsers = () => {
     socket.on('connect', () => {
         console.log('Conectado ao servidor Socket.IO');
     });
+    
 
     const { TOKEN, TOKENDECODIFICADO } = DataToken();
     const [Active, setActive] = useState(false);
