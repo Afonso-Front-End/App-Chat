@@ -8,7 +8,7 @@ import ListUsers from '../../scripts/listUsers';
 
 export default function Menu() {
     const { TOKENDECODIFICADO } = DataToken()
-    const { handleActive, Active, searchQuery, setSearchQuery, handleSearch, searchResults, msgSearchResults, sendFriendRequest, loading, listUsersPending } = ListUsers()
+    const { handleActive, Active, searchQuery, setSearchQuery, handleSearch, searchResults, msgSearchResults, sendFriendRequest, loading, listUsersPending, handleAcceptFriendRequest } = ListUsers()
 
     return (
         <div className="container-lista-amizades">
@@ -58,7 +58,7 @@ export default function Menu() {
                                     </div>
                                 </div>
                                 <div className='btn-aceitar-recusar'>
-                                    <button >Aceitar</button>
+                                    <button onClick={() =>handleAcceptFriendRequest(TOKENDECODIFICADO.identifier, users.user.identifier)}>Aceitar</button>
                                     <button>Recusar</button>
                                 </div>
                             </div>
@@ -143,6 +143,7 @@ export default function Menu() {
                                     <div className='data-info-info-usuario-logado'>
                                         <p>{TOKENDECODIFICADO.nome}</p>
                                         <p>{TOKENDECODIFICADO.email}</p>
+                                        <p>{TOKENDECODIFICADO.identifier}</p>
                                     </div>
                                 </div>
 

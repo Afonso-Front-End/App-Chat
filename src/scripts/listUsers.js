@@ -1,15 +1,21 @@
 import { useCallback, useEffect, useState } from "react";
 import DataToken from "./dataToken";
 
+import { io } from "socket.io-client";
+const socket = io('https://api-planetscale-9eq0wg2jd-afonsos-projects.vercel.app/');
 
 const ListUsers = () => {
+    socket.on('connect', () => {
+        console.log('Conectado ao servidor Socket.IO');
+    });
+
     const { TOKEN, TOKENDECODIFICADO } = DataToken();
     const [Active, setActive] = useState(false);
     const [loading, setLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [msgSearchResults, setMsgSearchResults] = useState('Pesquise pelo identificador!');
-    const [listUsersPending, setListListUsersPending] = useState([]);
+    const [listUsersPending, setListUsersPending] = useState([]);
 
     const handleActive = () => {
         setActive(!Active);
@@ -82,7 +88,6 @@ const ListUsers = () => {
         // const DATA_BASE = "http://localhost:3001";
         const DATA_BASE = "https://api-planetscale-fawn.vercel.app";
         try {
-            console.log('Iniciando requisição para obter solicitações pendentes...');
             const response = await fetch(`${DATA_BASE}/friend-requests/${TOKENDECODIFICADO.identifier}/pending`, {
                 method: "GET",
                 headers: {
@@ -93,16 +98,14 @@ const ListUsers = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                if (data.success === true) {
-                    const pendingRequests = data.pendingRequests;
-                    setListListUsersPending(pendingRequests);
-                    console.log(pendingRequests)
+
+                if (Array.isArray(data.pendingRequests)) {
+                    setListUsersPending(data.pendingRequests);
                 } else {
-                    console.log('Erro ao obter as solicitações pendentes:', data.message);
+                    console.log('Erro: A resposta não contém solicitações pendentes válidas.');
                 }
             } else {
                 console.log('Erro ao obter as solicitações pendentes:', response.statusText);
-                console.log(response);
             }
         } catch (error) {
             console.error('Erro na solicitação de obter as solicitações pendentes:', error);
@@ -110,8 +113,51 @@ const ListUsers = () => {
     }, [TOKEN, TOKENDECODIFICADO]);
 
     useEffect(() => {
-        fetchPendingRequests();     
+        fetchPendingRequests();
     }, [fetchPendingRequests]);
+
+    const handleAcceptFriendRequest = async (receiverIdentifier, senderIdentifier) => {
+        try {
+            // const DATA_BASE = "http://localhost:3001";
+            const DATA_BASE = "https://api-planetscale-fawn.vercel.app";
+
+            const response = await fetch(`${DATA_BASE}/friend-requests/accept`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${TOKEN}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ receiverIdentifier, senderIdentifier }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Resposta da API ao aceitar a solicitação:', data);
+
+
+                if (data.success) {
+                    // Atualize a lista de solicitações pendentes após a aceitação
+                    // Exiba uma mensagem de sucesso
+                    setListUsersPending((prevList) =>
+                        prevList.filter((request) => request.user.identifier !== senderIdentifier)
+                    );
+                } else {
+                    console.log('Erro ao aceitar a solicitação de amizade:', data.message);
+                    // Exiba uma mensagem de erro
+                }
+            } else {
+                console.log('Erro ao aceitar a solicitação de amizade:', response.statusText);
+                console.log(response);
+                // Exiba uma mensagem de erro
+            }
+        } catch (error) {
+            console.error('Erro ao aceitar a solicitação de amizade:', error);
+            // console.log('Resposta da API ao aceitar a solicitação:', data);
+            console.log('Tipo de data:', typeof data);
+            // Exiba uma mensagem de erro
+        }
+    };
+
 
     return {
         handleActive,
@@ -123,7 +169,8 @@ const ListUsers = () => {
         msgSearchResults,
         sendFriendRequest,
         loading,
-        listUsersPending
+        listUsersPending,
+        handleAcceptFriendRequest,
     };
 };
 

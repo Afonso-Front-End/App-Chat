@@ -261,7 +261,7 @@
     height: 100%;
     position: absolute;
     width: 100%;
-    /* display: none; *importante* */
+    display: none; /*importante*/
 }
 
 .btn-aceitar-recusar {
