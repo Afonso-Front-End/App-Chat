@@ -9,6 +9,14 @@ const ListUsers = () => {
         console.log('Conectado ao servidor Socket.IO');
     });
 
+    socket.on('disconnect', () => {
+        console.log('Desconectado do servidor Socket.IO');
+    });
+
+    socket.on('error', (error) => {
+        console.error('Erro na conexão Socket.IO:', error);
+    });
+
     const { TOKEN, TOKENDECODIFICADO } = DataToken();
     const [Active, setActive] = useState(false);
     const [loading, setLoading] = useState(false);
