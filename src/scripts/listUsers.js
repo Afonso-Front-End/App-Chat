@@ -2,20 +2,11 @@ import { useCallback, useEffect, useState } from "react";
 import DataToken from "./dataToken";
 
 import { io } from "socket.io-client";
-const socket = io('https://vercel.com/afonsos-projects/api-planetscale/');
-// const socket = io('http://localhost:3001/');
+const socket = io('https://api-planetscale-9eq0wg2jd-afonsos-projects.vercel.app/');
 
 const ListUsers = () => {
     socket.on('connect', () => {
         console.log('Conectado ao servidor Socket.IO');
-    });
-
-    socket.on('disconnect', () => {
-        console.log('Desconectado do servidor Socket.IO');
-    });
-
-    socket.on('error', (error) => {
-        console.error('Erro na conexão Socket.IO:', error);
     });
 
     const { TOKEN, TOKENDECODIFICADO } = DataToken();
