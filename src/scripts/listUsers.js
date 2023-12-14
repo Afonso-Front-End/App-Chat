@@ -53,8 +53,8 @@ const ListUsers = () => {
     }
 
     const sendFriendRequest = async (friendIdentifier) => {
-        const DATA_BASE = "http://localhost:3001";
-        // const DATA_BASE = "https://api-planetscale-fawn.vercel.app";
+        // const DATA_BASE = "http://localhost:3001";
+        const DATA_BASE = "https://api-planetscale-fawn.vercel.app";
 
         try {
             const response = await fetch(`${DATA_BASE}/send-request/${friendIdentifier}`, {
