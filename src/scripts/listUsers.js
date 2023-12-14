@@ -39,6 +39,7 @@ const ListUsers = () => {
                     setSearchResults(userArray);
                     setMsgSearchResults(null);
                 } else {
+                    setSearchResults([]);
                     setMsgSearchResults('Usuario nao encontrado!');
                     return data;
                 }
