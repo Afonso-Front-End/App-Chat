@@ -8,7 +8,7 @@ export default function Conection() {
     useEffect(() => {
         const onConnect = () => {
             socket.emit('usuario conectado', userLog.identifier );
-
+            console.log('usuario conectado', userLog.identifier)
         };
         
         const onDisconnect = () => {
