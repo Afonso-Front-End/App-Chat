@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { socket } from '../socket';
+import  socket  from '../socket';
 import useJwtToken from '../js/Token';
 
 export default function Conection() {
