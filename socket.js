@@ -1,6 +1,5 @@
 import { io } from 'socket.io-client';
 
-// "undefined" means the URL will be computed from the `window.location` object
 const URL = process.env.NODE_ENV === 'production' ? undefined : 'https://api-planetscale-psi.vercel.app';
 
-export const socket = io(URL, { path: '/socket.io' });
+export const socket = io(URL);
