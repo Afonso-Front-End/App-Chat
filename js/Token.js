@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { jwtDecode } from 'jwt-decode'
 
-
 export default function DataToken() {
     const [userLog, setUserLog] = useState([]);
     const [token, setToken] = useState(null);
@@ -21,14 +20,13 @@ export default function DataToken() {
 
         const urlParams = new URLSearchParams(window.location.search);
         const tokenFromURL = urlParams.get('token');
+        const token = localStorage.getItem("token");
 
         if (tokenFromURL) {
             localStorage.setItem("token", tokenFromURL);
 
-            const token = localStorage.getItem("token");
-    
             const tokenDecodificado = decodeToken(token);
-    
+
             setUserLog({
                 nome: tokenDecodificado.nome,
                 email: tokenDecodificado.email,
@@ -36,7 +34,7 @@ export default function DataToken() {
                 img: tokenDecodificado.url_imagem,
             });
             setToken(token);
-        }else{
+        } else {
             console.log('Nenhum token ')
         }
 

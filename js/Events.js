@@ -31,7 +31,7 @@ const UseEvents = () => {
     const [profileConfig, setProfileConfig] = useState(false)
 
     const [activeLi, setActiveLi] = useState(null)
-
+    
     useEffect(() => {
 
         socket.on('resultadoPesquisa', (resultadoPesquisa) => {
@@ -49,9 +49,9 @@ const UseEvents = () => {
             }
             else {
                 setMensagem('Nenhum usuario encontrado!')
-                setTimeout(()=>{
+                setTimeout(() => {
                     setMensagem('')
-                },5000)
+                }, 5000)
             }
         });
 
@@ -94,7 +94,12 @@ const UseEvents = () => {
         })
 
         socket.on('novaMensagem', (mensagem) => {
-            setChatHistory([...chatHistory, mensagem]);
+            if (mensagem.remetente === userSelected.identifier) {
+                setChatHistory([...chatHistory, mensagem]);
+                console.log(`Mensagem para usuário selecionado: ${mensagem.remetente}`);
+            } else {
+                
+            } 
         });
 
         socket.on('mensagemEnviada', (mensagem) => {
@@ -102,7 +107,6 @@ const UseEvents = () => {
         });
 
         socket.on('historicoMensagens', (mensagem) => {
-            // Formatar cada mensagem do histórico antes de adicionar ao estado
             const historicoFormatado = mensagem.historico.map(formatarMensagemParaRenderizar);
             setChatHistory([...chatHistory, ...historicoFormatado]);
         });
@@ -110,9 +114,13 @@ const UseEvents = () => {
         return () => {
             socket.off('resultadoPesquisa');
             socket.off('notificationEnviada');
+            socket.off('notificationRecebida');
             socket.off('sucess');
             socket.off('lista');
             socket.off('history');
+            socket.off('novaMensagem');
+            socket.off('mensagemEnviada');
+            socket.off('historicoMensagens');
         };
 
     }, [chatHistory]);
@@ -127,9 +135,9 @@ const UseEvents = () => {
             setResults(false)
             setResultsSearch([])
             setMensagem('Digite um identificador!')
-            setTimeout(()=>{
+            setTimeout(() => {
                 setMensagem('')
-            },5000)
+            }, 5000)
         } else {
             socket.emit('pesquisar', value);
             setMensagem('')
@@ -185,9 +193,9 @@ const UseEvents = () => {
     }
 
     const activeProfile = () => {
-        if(!profileConfig){
+        if (!profileConfig) {
             setProfileConfig(!profileConfig)
-        }else{
+        } else {
             setProfileConfig(!profileConfig)
         }
     }

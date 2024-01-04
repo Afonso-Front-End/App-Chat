@@ -7,8 +7,13 @@ export default function Conection() {
 
     useEffect(() => {
         const onConnect = () => {
-            socket.emit('usuario conectado', userLog.identifier );
-            console.log('usuario conectado', userLog.identifier)
+            if (userLog.identifier === undefined) {
+                onDisconnect()
+                return false
+            }else{
+                socket.emit('usuario conectado', userLog.identifier );
+                console.log('usuario conectado', userLog.identifier)
+            }
         };
         
         const onDisconnect = () => {

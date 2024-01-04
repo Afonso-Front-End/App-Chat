@@ -102,6 +102,7 @@ export default function Chat() {
                                         <p>{usuario.nome}</p>
                                         <p>{usuario.email}</p>
                                     </div>
+                                    <span></span>
                                 </li>
 
                             ))}
@@ -115,8 +116,7 @@ export default function Chat() {
                     {notification && (
                         <div className="mensagem-notification">
                             <div className="tags_msg">
-                                <p>Notificacao!</p>
-                                <p>{mensagemNotification.mensagem.nome} Adicionou voce!</p>
+                                <p>{mensagemNotification.mensagem.nome} Adicionou vocé!</p>
                             </div>
                             <div className="profile_notification">
                                 <div className="profile_notification_img">
