@@ -119,7 +119,6 @@ const UseEvents = () => {
         socket.on('historicoMensagens', (mensagem) => {
             const historicoFormatado = mensagem.historico.map(formatarMensagemParaRenderizar);
             setChatHistory([...chatHistory, ...historicoFormatado]);
-            console.log(historicoFormatado)
         });
 
         socket.on('status',(mensagem)=>{

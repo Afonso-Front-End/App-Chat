@@ -142,13 +142,11 @@ export default function Chat() {
                     )}
                 </div>
 
-                <div className="container_chat">
+                <div className="container-chat">
                     {chat && (
-                        <div className="content_chat">
+                        <div className="content-chat">
                             <div className='profile-user-selected'>
-
                                 <img className="profile-user-selected-img" src={userSelected.url_imagem} alt="profile-user-selected-img" />
-
                                 <div className="profile-user-data">
                                     <div className="profile-user-info">
                                         <p id="nome">{userSelected.nome}</p>
@@ -157,32 +155,37 @@ export default function Chat() {
                                     <p id="status" style={{ color: userSelected.status === 'online' ? '#0CF25D' : '#FF7F60' }}>{userSelected.status}</p>
                                 </div>
                             </div>
-                            <ul id="messages" ref={messagesRef}>
+
+                            <ul ref={messagesRef} className="content-messages">
                                 {chatHistory && chatHistory.map((message, index) => (
-                                    <li key={index} className="message"
+                                    <li key={index} className="profile-message"
 
                                         style={{
                                             alignSelf: message.destinatario === `${userLog.identifier}` ? 'flex-start' : 'flex-end',
                                             flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row'
                                         }} >
 
-                                        <div className="message_img">
-                                            <img src={message.img} alt="Imagem" />
-                                        </div>
+                                        <img className="profile-message-img" src={message.img} alt="profile-message-img" />
 
-                                        <div className="data-info" >
-                                            <div className="info"
+                                        <div className="profile-data-info" >
+                                            <div className="profile-data"
                                                 style={{ flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row' }}>
-                                                    <p>{new Date(message.hora).toLocaleString()}</p>
-                                                <p style={{alignSelf: message.destinatario === `${userLog.identifier}` ? 'flex-end' : 'flex-start'}}>
-                                                    {message.destinatario === `${userLog.identifier}` ? 'De ' : 'Eu '}
+
+                                                <div className="new-date" style={{flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row'}}>
+                                                    <p> {new Date(message.hora).toLocaleString()} </p>
+                                                </div>
+
+                                                <div className="profile-info" style={{flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row'}}>
+                                                    {message.destinatario === `${userLog.identifier}` ? 'De ' : 'Eu '}  
                                                     {message.nome}
-                                                </p>
+                                                </div>
+
                                             </div>
-                                            <span id="msg"
-                                                style={{ color: message.destinatario === `${userLog.identifier}` ? '#A69581' : '#A4B3BF', flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row' }}>
-                                                {message.message}
-                                            </span>
+
+                                            <div className="content-message-text" style={{ color: message.destinatario === `${userLog.identifier}` ? '#A69581' : '#A4B3BF',flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row', textAlign: 'end' }}>
+                                                <p id="message">{message.message}</p>
+                                            </div>
+
                                         </div>
                                     </li>
                                 ))}
