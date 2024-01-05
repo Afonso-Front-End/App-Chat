@@ -2,7 +2,38 @@
     position: relative;
 }
 
-.profile-data {
+/* Pofile Usuario logado */
+.profile-user-login {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    gap: 10px;
+}
+
+.profile-user-login-img {
+    width: 55px;
+    height: 50px;
+    position: relative;
+    z-index: 5;
+    border-radius: 4px;
+    cursor: grab;
+}
+
+.profile-user-login #status {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    z-index: 0;
+    background-color: #272626;
+    padding: 0.2rem;
+    border-radius: 3px;
+    border-top: 1px solid #cffccf1a;
+    width: 60px;
+    height: 33px;
+    text-align: center;
+}
+
+.profile-user-login-data {
     width: 100%;
     height: 4.5rem;
     display: flex;
@@ -13,63 +44,33 @@
     z-index: 1;
 }
 
-.profile_img {
-    width: 50px;
-    height: 50px;
-    border-radius: 10%;
-    overflow: hidden;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    user-select: none;
-    cursor: grab;
+.profile-user-login-data-info #nome {
+    color: #cffccf;
 }
 
-.profile_img img {
-    height: 50px;
-    /* border-radius: 50%; */
+.profile-user-login-data-info #email {
+    color: #BFBFBF;
 }
 
-/*  */
-.profile_data {
-    height: 50px;
-    letter-spacing: 0.5px;
-}
+/* -------------- */
 
-.profile_data p:nth-child(1) {
-    font-weight: 500;
-
-}
-
-.profile_data p:nth-child(2) {
-    font-weight: 200;
-    color: #FFF;
-}
-
-/* profile-config */
+/* Porfile Usuario logado config */
 .profile-config {
     width: 300px;
     height: 350px;
-    /* background-color: #333333ef; */
     background-color: #333333;
     position: absolute;
-    z-index: 1;
+    z-index: 6;
     top: 10px;
     left: 0px;
     border-radius: 5px;
     border-top: 1px solid #cffccf12;
-    /* border-left: 1px solid #cffccf1d; */
     transition: 0.3s ease-in-out;
     overflow: hidden;
+    padding: 0.3rem;
 }
 
-.profile-config:hover {
-    /* background-color: #333333; */
-    z-index: 1;
-    /* border-left: 1px solid #cffccf1d; */
-}
-
-.profile-config button {
+.profile-config-profile-button {
     display: flex;
     align-items: center;
     background-color: #272626;
@@ -77,26 +78,14 @@
     padding: 0.6rem;
     border-radius: 4px;
     gap: 4px;
-    /* border: 1px solid  #cffccf32; */
     transition: 0.3s ease-in-out;
     color: #CFFCCF;
-    margin: 10px;
+    margin-bottom: 10px;
     position: relative;
     cursor: grab;
 }
-.profile-config button:hover {
-    background-color: #272626d4;
-    color: #FFF;
-}
 
-.profile-cofig-data {
-    display: flex;
-    /* flex-direction: column; */
-    margin-left: 10px;
-    gap: 10px;
-}
-
-.profile-config button span {
+.profile-config-profile-button span {
     content: '';
     width: 3px;
     height: 15px;
@@ -106,26 +95,163 @@
     border-radius: 30px;
 }
 
-.profile_config_img {
-    
+.profile-config-profile-button:hover {
+    background-color: #272626d4;
+    color: #FFF;
 }
 
-.profile_config_img img {
+.profile-config-data-info {
+    display: flex;
+    gap: 10px;
+}
+
+.profile-config-img {
     height: 45px;
     width: 55px;
     border-radius: 5px;
 }
 
-.profile_config_info {
+.profile-cofig-data {
+    display: flex;
+    margin-left: 10px;
+    gap: 10px;
+}
+
+.profile-config-info {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    color: #CFFCCF;
 }
-.profile_config_info p:nth-child(3){
+
+.profile-config-info span {
+    color: #FFFF;
+}
+
+.profile-config-info #nome {
+    color: #cffccf;
+    text-wrap: wrap;
+}
+
+.profile-config-info #email {
+    text-wrap: wrap;
+    color: #cffccf;
+}
+
+.profile-config-info #identifier {
     font-size: 1.4rem;
     background-color: #272626;
     padding: 0.5rem;
     border-radius: 5px;
     color: #FF8060;
+}
+
+/* ----------- */
+
+/* Profile lista de usuarios */
+.list-user-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem 0.5rem;
+    border-radius: 4px;
+    cursor: grab;
+    margin-top: 5px;
+    position: relative;
+}
+
+.list-user-item:hover {
+    background-color: #33333381;
+}
+
+.list-user-item-active {
+    background-color: #333333d7;
+}
+
+.list-user-item-active span {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 25px;
+    background-color: #CFFCCF;
+    position: absolute;
+    left: 0;
+    border-radius: 50px;
+    transition: 0.5s ease-in-out;
+}
+
+.list-user-img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.list-user-data {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.list-user-data {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.list-user-info #nome {
+    color: #cffccf;
+}
+
+.list-user-info #email {
+    color: #FFFF;
+}
+.list-user-data #status{
+    position: absolute;
+    right: 5px;
+    top: 2px;
+}
+/* Profile do usuario selecionado no chat de menssagem */
+.list-users {
+    height: calc(100% - 15rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.list-users::-webkit-scrollbar {
+    width: 0;
+}
+
+.profile-user-selected {
+    background-color: #333333;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 0 0.5rem;
+    height: 4.5rem;
+    gap: 10px;
+}
+
+.profile-user-selected-img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.profile-user-data {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-user-info #nome {
+    color: #cffccf;
+    font-weight: 300;
+    font-size: 17px;
+}
+
+.profile-user-info #email {
+    color: #cffccf;
+    font-weight: 300;
+    font-size: 15px;
 }

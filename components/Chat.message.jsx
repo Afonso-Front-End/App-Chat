@@ -6,7 +6,7 @@ import UseEvents from "../js/Events";
 import DataToken from "../js/Token";
 export default function Chat() {
 
-   
+
     const messagesRef = useRef();
 
     const { userLog } = DataToken()
@@ -16,7 +16,7 @@ export default function Chat() {
             lista, listaUsuarios, mensagem, mensagemNotification, mensagemText,
             notification, results, resultsSearch, setMensagemText,
             setValue, userSelected, value, chatHistory, messageWelcome,
-            activeProfile, profileConfig,activeLi
+            activeProfile, profileConfig, status
         } = UseEvents()
 
 
@@ -29,37 +29,44 @@ export default function Chat() {
     return (
         <div className='content'>
             <div className='left'>
+
                 <div className="profile">
-                    <div className="profile-data">
-                        <div className="profile_img">
-                            <img src={userLog.img} alt="Imagem" onClick={activeProfile} />
-                        </div>
-                        <div className="profile_data">
-                            <p>{userLog.nome}</p>
-                            <p>{userLog.email}</p>
+                    <div className="profile-user-login">
+
+                        <img className="profile-user-login-img" src={userLog.img} alt="profile-user-login-img" onClick={activeProfile} />
+
+                        <div className="profile-user-login-data">
+                            <div className="profile-user-login-data-info">
+                                <p id="nome">{userLog.nome}</p>
+                                <p id="email">{userLog.email}</p>
+                            </div>
+                            <span id="status">{status}</span>
                         </div>
                     </div>
 
                     {profileConfig && (
                         <div className="profile-config">
-                            <div>
-                                <button onClick={activeProfile} > <img src={iconPerson} alt="icon-profile" /> Perfil<span></span></button>
-                                <div className="profile-cofig-data">
-                                    <div className="profile_config_img">
-                                        <img src={userLog.img} alt="Imagem" />
-                                    </div>
-                                    <div className="profile_config_info">
-                                        <p><span>Nome</span> {userLog.nome}</p>
-                                        <p><span>E-mail</span> {userLog.email}</p>
-                                        <p>{userLog.identifier}</p>
+
+                            <div className="profile-config-profile">
+                                <button className="profile-config-profile-button" onClick={activeProfile} > <img src={iconPerson} alt="icon-profile" /> Perfil<span></span></button>
+
+                                <div className="profile-config-data-info">
+
+                                    <img className="profile-config-img" src={userLog.img} alt="Imagem" />
+
+                                    <div className="profile-config-info">
+                                        <p id="nome"><span>Nome:</span> {userLog.nome}</p>
+                                        <p id="email"><span>E-mail:</span> {userLog.email}</p>
+                                        <p id="identifier">{userLog.identifier}</p>
                                     </div>
                                 </div>
                             </div>
 
-                            
                         </div>
                     )}
                 </div>
+
+
                 <div className="ToAdd">
 
                     <div className="search">
@@ -90,17 +97,21 @@ export default function Chat() {
                     )}
 
                 </div>
-                <div className="ListUsers">
+
+                <div className="list-users">
                     {lista && (
-                        <ul>
+                        <ul className="list">
                             {listaUsuarios && listaUsuarios.map((usuario, index) => (
-                                <li key={index} className={`ListUsers_Lista ${userSelected.identifier === usuario.identifier ? 'active-li' : ''}`} onClick={() => handleSelectUser(usuario)}>
-                                    <div className="ListUsers_img">
-                                        <img src={usuario.url_imagem} alt="Imagem" />
-                                    </div>
-                                    <div className="ListUsers_data">
-                                        <p>{usuario.nome}</p>
-                                        <p>{usuario.email}</p>
+                                <li key={index} className={`list-user-item ${userSelected.identifier === usuario.identifier ? 'list-user-item-active' : ''}`} onClick={() => handleSelectUser(usuario)}>
+
+                                    <img className="list-user-img" src={usuario.url_imagem} alt="list-user-img" />
+
+                                    <div className="list-user-data">
+                                        <div className="list-user-info">
+                                            <p id="nome">{usuario.nome}</p>
+                                            <p id="email">{usuario.email}</p>
+                                        </div>
+                                        <p id="status" style={{ color: usuario.status === 'online' ? '#0CF25D' : '#FF7F60' }}>{usuario.status}</p>
                                     </div>
                                     <span></span>
                                 </li>
@@ -134,27 +145,44 @@ export default function Chat() {
                 <div className="container_chat">
                     {chat && (
                         <div className="content_chat">
-                            <div className='ListUsers_Lista'>
-                                <div className="ListUsers_img">
-                                    <img src={userSelected.url_imagem} alt="Imagem" />
-                                </div>
-                                <div className="ListUsers_data">
-                                    <p>{userSelected.nome}</p>
-                                    <p>{userSelected.email}</p>
+                            <div className='profile-user-selected'>
+
+                                <img className="profile-user-selected-img" src={userSelected.url_imagem} alt="profile-user-selected-img" />
+
+                                <div className="profile-user-data">
+                                    <div className="profile-user-info">
+                                        <p id="nome">{userSelected.nome}</p>
+                                        <p id="email">{userSelected.email}</p>
+                                    </div>
+                                    <p id="status" style={{ color: userSelected.status === 'online' ? '#0CF25D' : '#FF7F60' }}>{userSelected.status}</p>
                                 </div>
                             </div>
                             <ul id="messages" ref={messagesRef}>
                                 {chatHistory && chatHistory.map((message, index) => (
-                                    <li key={index} className="message">
+                                    <li key={index} className="message"
+
+                                        style={{
+                                            alignSelf: message.destinatario === `${userLog.identifier}` ? 'flex-start' : 'flex-end',
+                                            flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row'
+                                        }} >
+
                                         <div className="message_img">
                                             <img src={message.img} alt="Imagem" />
                                         </div>
-                                        <div className="data-info">
-                                            <div className="info">
-                                                <p>{message.nome}</p>
-                                                <p>{new Date(message.hora).toLocaleString()}</p>
+
+                                        <div className="data-info" >
+                                            <div className="info"
+                                                style={{ flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row' }}>
+                                                    <p>{new Date(message.hora).toLocaleString()}</p>
+                                                <p style={{alignSelf: message.destinatario === `${userLog.identifier}` ? 'flex-end' : 'flex-start'}}>
+                                                    {message.destinatario === `${userLog.identifier}` ? 'De ' : 'Eu '}
+                                                    {message.nome}
+                                                </p>
                                             </div>
-                                            <span>{message.message}</span>
+                                            <span id="msg"
+                                                style={{ color: message.destinatario === `${userLog.identifier}` ? '#A69581' : '#A4B3BF', flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row' }}>
+                                                {message.message}
+                                            </span>
                                         </div>
                                     </li>
                                 ))}

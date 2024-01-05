@@ -94,3 +94,7 @@
 .notice p {
     color: #CFFCCF;
 }
+/* status */
+#status {
+    font-weight: 300;
+}

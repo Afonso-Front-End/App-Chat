@@ -31,7 +31,8 @@ const UseEvents = () => {
     const [profileConfig, setProfileConfig] = useState(false)
 
     const [activeLi, setActiveLi] = useState(null)
-    
+
+    const [status, setStatus] = useState(null)
     useEffect(() => {
 
         socket.on('resultadoPesquisa', (resultadoPesquisa) => {
@@ -93,13 +94,22 @@ const UseEvents = () => {
             }
         })
 
+        socket.on('atualizarListaUsuarios', ({ identifier, status }) => {
+            setListaUsuarios((prevLista) => {
+                const novaLista = prevLista.map((usuario) =>
+                    usuario.identifier === identifier ? { ...usuario, status } : usuario
+                );
+
+                return novaLista;
+            });
+        });
+
         socket.on('novaMensagem', (mensagem) => {
             if (mensagem.remetente === userSelected.identifier) {
                 setChatHistory([...chatHistory, mensagem]);
-                console.log(`Mensagem para usuário selecionado: ${mensagem.remetente}`);
             } else {
-                
-            } 
+                // ====================
+            }
         });
 
         socket.on('mensagemEnviada', (mensagem) => {
@@ -109,7 +119,12 @@ const UseEvents = () => {
         socket.on('historicoMensagens', (mensagem) => {
             const historicoFormatado = mensagem.historico.map(formatarMensagemParaRenderizar);
             setChatHistory([...chatHistory, ...historicoFormatado]);
+            console.log(historicoFormatado)
         });
+
+        socket.on('status',(mensagem)=>{
+            setStatus(mensagem.mensagem)
+        })
 
         return () => {
             socket.off('resultadoPesquisa');
@@ -185,6 +200,7 @@ const UseEvents = () => {
     function formatarMensagemParaRenderizar(mensagem) {
         return {
             remetente: mensagem.remetente,
+            destinatario: mensagem.destinatario,
             nome: mensagem.nome,
             img: mensagem.img,
             message: mensagem.message,
@@ -223,6 +239,7 @@ const UseEvents = () => {
         activeProfile,
         profileConfig,
         activeLi,
+        status,
     }
 
 }
