@@ -17,6 +17,8 @@
     flex-direction: column;
     gap: 10px;
     overflow-y: hidden;
+    overflow-x: hidden;
+    border-radius: 5px;
 }
 .rigth {
     width: calc(100% - 400px);

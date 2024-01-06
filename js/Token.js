@@ -1,48 +1,92 @@
 import { useState, useEffect } from "react";
-import { jwtDecode } from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode';
 
 export default function DataToken() {
     const [userLog, setUserLog] = useState([]);
     const [token, setToken] = useState(null);
+    const [tempoRestante, setTempoRestante] = useState(null);
+    const [tempToken, setTempToken] = useState(null)
+
     useEffect(() => {
         const decodeToken = (token) => {
             try {
-                if (typeof token === "string") {
-                    const decoded = jwtDecode(token);
-                    return decoded;
-                } else {
-                    return null;
-                }
+                return typeof token === "string" ? jwtDecode(token) : null;
             } catch (error) {
+                console.error("Erro ao decodificar o token:", error);
                 return null;
+            }
+        };
+
+        const validToken = (exp) => exp - (new Date().getTime() / 1000);
+
+        const processToken = (tokenValue) => {
+            const decodedToken = decodeToken(tokenValue);
+
+            if (decodedToken) {
+                setUserLog({
+                    nome: decodedToken.nome,
+                    email: decodedToken.email,
+                    identifier: decodedToken.identifier,
+                    img: decodedToken.url_imagem,
+                });
+
+                setToken(tokenValue);
+
+                let tempoRestanteToken = validToken(decodedToken.exp);
+                setTempoRestante(tempoRestanteToken);
+
+
+                setInterval(() => {
+                    const totalSegundos = tempoRestanteToken;
+                    const dias = Math.floor(totalSegundos / 86400);
+                    const horas = Math.floor((totalSegundos % 86400) / 3600);
+                    const minutos = Math.floor(((totalSegundos % 86400) % 3600) / 60);
+                    const segundos = Math.floor(((totalSegundos % 86400) % 3600) % 60);
+
+                    // console.log(`${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos.`);
+                    setTempToken(`${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos.` )
+
+                    tempoRestanteToken--;
+                }, 1000);
+
+                if (tempoRestanteToken <= 0) {
+                    localStorage.removeItem("token");
+                    console.log("Token expirado, removido do localStorage.");
+                }
+            } else {
+                console.log(`Token inválido ou não decodificado corretamente: ${tokenValue}`);
             }
         };
 
         const urlParams = new URLSearchParams(window.location.search);
         const tokenFromURL = urlParams.get('token');
-        const token = localStorage.getItem("token");
 
         if (tokenFromURL) {
             localStorage.setItem("token", tokenFromURL);
+            processToken(tokenFromURL);
 
-            const tokenDecodificado = decodeToken(token);
-
-            setUserLog({
-                nome: tokenDecodificado.nome,
-                email: tokenDecodificado.email,
-                identifier: tokenDecodificado.identifier,
-                img: tokenDecodificado.url_imagem,
-            });
-            setToken(token);
+            // Remova o token da URL após o processamento
+            urlParams.delete('token');
+            const newUrl = window.location.pathname + "token processado?" + urlParams.toString();
+            window.history.replaceState({}, '', newUrl);
         } else {
-            console.log('Nenhum token ')
+            const tokenNoLocalStorage = localStorage.getItem("token");
+            if (tokenNoLocalStorage) {
+                processToken(tokenNoLocalStorage);
+            } else {
+                console.log('Nenhum token');
+            }
         }
-
-
     }, []);
 
+    const exite = () => {
+        localStorage.removeItem("token");
+    }
     return {
         token,
         userLog,
-    }
-};
+        tempoRestante,
+        exite,
+        tempToken,
+    };
+}

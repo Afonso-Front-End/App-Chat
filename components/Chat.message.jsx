@@ -2,14 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import imgSearch from '../assets/icons/search.svg'
 import iconGithub from '../assets/icons/github.svg'
 import iconPerson from '../assets/icons/person.svg'
+import iconExite from '../assets/icons/exite.svg'
 import UseEvents from "../js/Events";
 import DataToken from "../js/Token";
-export default function Chat() {
 
+
+export default function Chat() {
 
     const messagesRef = useRef();
 
-    const { userLog } = DataToken()
+    const { userLog, exite, tempToken } = DataToken()
+
     const
         {
             chat, handleAdicioanar, handleMensagem, handleSearch, handleSelectUser,
@@ -29,7 +32,6 @@ export default function Chat() {
     return (
         <div className='content'>
             <div className='left'>
-
                 <div className="profile">
                     <div className="profile-user-login">
 
@@ -62,10 +64,10 @@ export default function Chat() {
                                 </div>
                             </div>
 
+                            <button className="exite" onClick={exite}>Sair<span></span><img src={iconExite} alt="icon-sair" /></button>
                         </div>
                     )}
                 </div>
-
 
                 <div className="ToAdd">
 
@@ -104,7 +106,9 @@ export default function Chat() {
                             {listaUsuarios && listaUsuarios.map((usuario, index) => (
                                 <li key={index} className={`list-user-item ${userSelected.identifier === usuario.identifier ? 'list-user-item-active' : ''}`} onClick={() => handleSelectUser(usuario)}>
 
-                                    <img className="list-user-img" src={usuario.url_imagem} alt="list-user-img" />
+                                    <div className="list-user-img">
+                                        <img src={usuario.url_imagem} alt="list-user-img" />
+                                    </div>
 
                                     <div className="list-user-data">
                                         <div className="list-user-info">
@@ -146,7 +150,10 @@ export default function Chat() {
                     {chat && (
                         <div className="content-chat">
                             <div className='profile-user-selected'>
-                                <img className="profile-user-selected-img" src={userSelected.url_imagem} alt="profile-user-selected-img" />
+                                <div className="profile-user-selected-img">
+                                    <img src={userSelected.url_imagem} alt="profile-user-selected-img" />
+                                </div>
+
                                 <div className="profile-user-data">
                                     <div className="profile-user-info">
                                         <p id="nome">{userSelected.nome}</p>
@@ -165,24 +172,26 @@ export default function Chat() {
                                             flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row'
                                         }} >
 
-                                        <img className="profile-message-img" src={message.img} alt="profile-message-img" />
+                                        <div className="profile-message-img">
+                                            <img src={message.img} alt="profile-message-img" />
+                                        </div>
 
                                         <div className="profile-data-info" >
                                             <div className="profile-data"
                                                 style={{ flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row' }}>
 
-                                                <div className="new-date" style={{flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row'}}>
+                                                <div className="new-date" style={{ flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row' }}>
                                                     <p> {new Date(message.hora).toLocaleString()} </p>
                                                 </div>
 
-                                                <div className="profile-info" style={{flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row'}}>
-                                                    {message.destinatario === `${userLog.identifier}` ? 'De ' : 'Eu '}  
+                                                <div className="profile-info" style={{ flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row' }}>
+                                                    {message.destinatario === `${userLog.identifier}` ? 'De ' : 'Eu '}
                                                     {message.nome}
                                                 </div>
 
                                             </div>
 
-                                            <div className="content-message-text" style={{ color: message.destinatario === `${userLog.identifier}` ? '#A69581' : '#A4B3BF',flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row', textAlign: 'end' }}>
+                                            <div className="content-message-text" style={{ color: message.destinatario === `${userLog.identifier}` ? '#A69581' : '#A4B3BF', flexDirection: message.destinatario !== `${userLog.identifier}` ? 'row-reverse' : 'row', textAlign: 'end' }}>
                                                 <p id="message">{message.message}</p>
                                             </div>
 
