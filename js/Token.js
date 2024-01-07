@@ -47,12 +47,14 @@ export default function DataToken() {
                     setTempToken(`${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos.` )
 
                     tempoRestanteToken--;
+                    if (tempoRestanteToken <= 0) {
+                        localStorage.removeItem("token");
+                        console.log("Token expirado, removido do localStorage.");
+                        alert()
+                        window.location.assign('https://login-users-systen.netlify.app/')
+                    }
                 }, 1000);
 
-                if (tempoRestanteToken <= 0) {
-                    localStorage.removeItem("token");
-                    console.log("Token expirado, removido do localStorage.");
-                }
             } else {
                 console.log(`Token inválido ou não decodificado corretamente: ${tokenValue}`);
             }
@@ -81,6 +83,7 @@ export default function DataToken() {
 
     const exite = () => {
         localStorage.removeItem("token");
+        window.location.assign('https://login-users-systen.netlify.app/')
     }
     return {
         token,

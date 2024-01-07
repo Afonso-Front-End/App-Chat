@@ -13,6 +13,7 @@ export default function Chat() {
 
     const { userLog, exite, tempToken } = DataToken()
 
+    console.log(tempToken)
     const
         {
             chat, handleAdicioanar, handleMensagem, handleSearch, handleSelectUser,
@@ -57,8 +58,8 @@ export default function Chat() {
                                     <img className="profile-config-img" src={userLog.img} alt="Imagem" />
 
                                     <div className="profile-config-info">
-                                        <p id="nome"><span>Nome:</span> {userLog.nome}</p>
-                                        <p id="email"><span>E-mail:</span> {userLog.email}</p>
+                                        <p id="nome"><span>Nome </span>{userLog.nome}</p>
+                                        <p id="email"><span>E-mail </span>{userLog.email}</p>
                                         <p id="identifier">{userLog.identifier}</p>
                                     </div>
                                 </div>
