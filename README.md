@@ -1,6 +1,4 @@
-# Chat Web
-
-[![Link para o Chat Web](https://login-users-system.netlify.app/)](https://login-users-system.netlify.app/)
+## [Chat Web](https://login-users-system.netlify.app/)
 
 Bem-vindo ao repositório dedicado a um inovador chat de mensagens! Ao clicar no título, você será direcionado para a tela de login. Embora algumas melhorias ainda estejam em desenvolvimento, este projeto é uma abordagem simples e divertida para interações em tempo real.
 
@@ -19,6 +17,7 @@ Este é um projeto de chat em TEMPO REAL desenvolvido em [React + Vite], utiliza
 
 ![Captura de Tela 1](screenshots/cadastro.png)
 ![Captura de Tela 2](screenshots/login.png)
+![Captura de Tela 2](screenshots/principal.png)
 ![Captura de Tela 3](screenshots/adicionar.png)
 ![Captura de Tela 4](screenshots/notificacao.png)
 ![Captura de Tela 5](screenshots/enviando-mensagem.png)
@@ -28,7 +27,7 @@ Este é um projeto de chat em TEMPO REAL desenvolvido em [React + Vite], utiliza
 ## Pré-requisitos
 
 - [Conhecimento em ReactJS, JavaScript, HTML, CSS, Express, Socket.IO, API, MySQL, UUID, BcryptJS (atenção, pode ocorrer conflito com o servidor da Vercel se 'bcrypt' for usado, sendo aconselhável 'bcryptjs'), Dotenv, Cors, Body-parser, Crypto para gerar uma chave SECRET, Moment].
-  Estudo contínuo em ReactJS.
+Estudo contínuo em ReactJS.
 
 ## Contribuição
 
