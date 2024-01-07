@@ -127,7 +127,12 @@
 
 .profile-config-data-info {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 10px;
+    /* background-color: yellowgreen; */
 }
 
 .profile-config-img {
@@ -155,10 +160,12 @@
 .profile-config-info #nome {
     color: #cffccf;
     text-wrap: wrap;
+    font-size: 14px;
 }
 
 .profile-config-info #email {
     text-wrap: wrap;
+    font-size: 14px;
     color: #cffccf;
 }
 

@@ -13,7 +13,6 @@ export default function Chat() {
 
     const { userLog, exite, tempToken } = DataToken()
 
-    console.log(tempToken)
     const
         {
             chat, handleAdicioanar, handleMensagem, handleSearch, handleSelectUser,
@@ -160,7 +159,7 @@ export default function Chat() {
                                         <p id="nome">{userSelected.nome}</p>
                                         <p id="email">{userSelected.email}</p>
                                     </div>
-                                    <p id="status" style={{ color: userSelected.status === 'online' ? '#0CF25D' : '#FF7F60' }}>{userSelected.status}</p>
+                                    {/* <p id="status" style={{ color: userSelected.status === 'online' ? '#0CF25D' : '#FF7F60' }}>{userSelected.status}</p> */}
                                 </div>
                             </div>
 
