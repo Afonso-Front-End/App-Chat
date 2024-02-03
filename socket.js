@@ -1,5 +1,8 @@
 import { io } from 'socket.io-client';
 
-const URL = process.env.NODE_ENV === 'production' ? '' : 'https://api-socketio-chat-web-production.up.railway.app';
+const productionURL = 'https://api-socketio-chat-web-production.up.railway.app';
+const developmentURL = ''; // Adicione a URL correta para o ambiente de desenvolvimento, se necessário
 
-export const socket = io(URL);
+const socketURL = process.env.NODE_ENV === 'production' ? productionURL : developmentURL;
+
+export const socket = io(socketURL);
