@@ -50,7 +50,7 @@ export default function DataToken() {
                     if (tempoRestanteToken <= 0) {
                         localStorage.removeItem("token");
                         console.log("Token expirado, removido do localStorage.");
-                        alert()
+                        // alert()
                         window.location.assign('https://login-users-systen.netlify.app/')
                     }
                 }, 1000);
