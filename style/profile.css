@@ -31,6 +31,7 @@
     width: 60px;
     height: 33px;
     text-align: center;
+    color: #0CF25D;
 }
 
 .profile-user-login-data {
@@ -223,7 +224,6 @@
     border-radius: 50%;
 }
 .list-user-img img {
-    width: 100%;
     height: inherit;
     border-radius: 50%;
 }
@@ -276,17 +276,16 @@
 }
 
 .profile-user-selected-img {
-    width: 57px;
+    width: 55px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     border-radius: 50%;
 }
 .profile-user-selected-img img{
-    width: 100%;
-    height: inherit;
+    width: 55px;
+    height: 50px;
     border-radius: 50%;
 }
 

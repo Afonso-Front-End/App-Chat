@@ -4,6 +4,7 @@
 @import url('./toadd.css'); 
 @import url('./chatform.css'); 
 @import url('./notification.css'); 
+@import url('./mobile.css'); 
 
 * {
     margin: 0;

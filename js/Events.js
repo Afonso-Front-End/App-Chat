@@ -33,6 +33,9 @@ const UseEvents = () => {
     const [activeLi, setActiveLi] = useState(null)
 
     const [status, setStatus] = useState(null)
+
+    const [openMenu, setOpenMenu] = useState(false)
+
     useEffect(() => {
 
         socket.on('resultadoPesquisa', (resultadoPesquisa) => {
@@ -186,6 +189,7 @@ const UseEvents = () => {
         setChat(true)
         setMessageWelcome(false)
         setActiveLi(userSelect.length)
+        setOpenMenu(false)
     }
 
     const handleMensagem = () => {
@@ -215,6 +219,14 @@ const UseEvents = () => {
         }
     }
 
+    const handleOpenMenu = () => {
+        if(!openMenu){
+            setOpenMenu(true)
+        }else{
+            setOpenMenu(false)
+        }
+    }
+
     return {
         handleSearch,
         value,
@@ -239,6 +251,8 @@ const UseEvents = () => {
         profileConfig,
         activeLi,
         status,
+        handleOpenMenu,
+        openMenu,
     }
 
 }

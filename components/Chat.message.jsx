@@ -3,6 +3,7 @@ import imgSearch from '../assets/icons/search.svg'
 import iconGithub from '../assets/icons/github.svg'
 import iconPerson from '../assets/icons/person.svg'
 import iconExite from '../assets/icons/exite.svg'
+import iconBack from '../assets/icons/three-dots.svg'
 import UseEvents from "../js/Events";
 import DataToken from "../js/Token";
 
@@ -19,7 +20,7 @@ export default function Chat() {
             lista, listaUsuarios, mensagem, mensagemNotification, mensagemText,
             notification, results, resultsSearch, setMensagemText,
             setValue, userSelected, value, chatHistory, messageWelcome,
-            activeProfile, profileConfig, status
+            activeProfile, profileConfig, status, handleOpenMenu,openMenu
         } = UseEvents()
 
 
@@ -31,7 +32,12 @@ export default function Chat() {
 
     return (
         <div className='content'>
-            <div className='left'>
+            
+            <div className="back" onClick={handleOpenMenu}>
+                <button><img src={iconBack} alt="img-back" /></button>
+            </div>
+
+            <div className={`left  ${openMenu ? 'left-active': ''}`}>
                 <div className="profile">
                     <div className="profile-user-login">
 
@@ -159,7 +165,6 @@ export default function Chat() {
                                         <p id="nome">{userSelected.nome}</p>
                                         <p id="email">{userSelected.email}</p>
                                     </div>
-                                    {/* <p id="status" style={{ color: userSelected.status === 'online' ? '#0CF25D' : '#FF7F60' }}>{userSelected.status}</p> */}
                                 </div>
                             </div>
 

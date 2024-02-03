@@ -76,7 +76,8 @@ export default function DataToken() {
             if (tokenNoLocalStorage) {
                 processToken(tokenNoLocalStorage);
             } else {
-                console.log('Nenhum token');
+                alert('Nenhum token');
+                window.location.assign('https://login-users-systen.netlify.app/')
             }
         }
     }, []);
