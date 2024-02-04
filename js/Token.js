@@ -69,8 +69,8 @@ export default function DataToken() {
 
             // Remova o token da URL após o processamento
             urlParams.delete('token');
-            const newUrl = window.location.pathname + "token processado?" + urlParams.toString();
-            window.history.replaceState({}, 'token processado?', newUrl);
+            const newUrl = window.location.pathname + "" + urlParams.toString();
+            window.history.replaceState({}, "", newUrl);
         } else {
             const tokenNoLocalStorage = localStorage.getItem("token");
             if (tokenNoLocalStorage) {
