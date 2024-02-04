@@ -133,11 +133,11 @@ export default function Chat() {
             </div>
 
             <div className='rigth'>
-                <div className={`notification ${notification ? 'active-notification' : ''}`}>
+                <div className={`notification ${notification ? 'active-notification' : 'notification'}`}>
                     {notification && (
                         <div className="mensagem-notification">
                             <div className="tags_msg">
-                                <p>{mensagemNotification.mensagem.nome} Adicionou vocé!</p>
+                                <p>{mensagemNotification.mensagem.nome} Adicionou vocé!</p> 
                             </div>
                             <div className="profile_notification">
                                 <div className="profile_notification_img">

@@ -63,9 +63,9 @@ const UseEvents = () => {
             if (mensagem) {
                 setNotification(true)
                 setMensagemNotification(mensagem)
-                setTimeout(() => {
-                    setNotification(false)
-                }, 5000)
+                // setTimeout(() => {
+                //     setNotification(false)
+                // }, 7000)
                 return
             }
         })

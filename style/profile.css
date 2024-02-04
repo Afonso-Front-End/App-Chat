@@ -15,14 +15,11 @@
     height: 50px;
     position: relative;
     z-index: 5;
-    border-radius: 4px;
+    border-radius: 50%;
     cursor: grab;
 }
 
 .profile-user-login #status {
-    position: absolute;
-    right: 10px;
-    top: 5px;
     z-index: 0;
     background-color: #272626;
     padding: 0.2rem;
@@ -69,7 +66,9 @@
     transition: 0.3s ease-in-out;
     overflow: hidden;
     padding: 0.3rem;
+    transition: 0.3s linear;
 }
+
 .profile-config .exite {
     width: 65px;
     background-color: #272626;
@@ -86,7 +85,8 @@
     cursor: grab;
     gap: 2px;
 }
-.profile-config .exite span{
+
+.profile-config .exite span {
     content: '';
     width: 3px;
     height: 15px;
@@ -223,6 +223,7 @@
     overflow: hidden;
     border-radius: 50%;
 }
+
 .list-user-img img {
     height: inherit;
     border-radius: 50%;
@@ -249,11 +250,13 @@
 .list-user-info #email {
     color: #FFFF;
 }
-.list-user-data #status{
+
+.list-user-data #status {
     position: absolute;
     right: 5px;
     top: 2px;
 }
+
 /* Profile do usuario selecionado no chat de menssagem */
 .list-users {
     height: calc(100% - 15rem);
@@ -283,7 +286,8 @@
     justify-content: center;
     border-radius: 50%;
 }
-.profile-user-selected-img img{
+
+.profile-user-selected-img img {
     width: 55px;
     height: 50px;
     border-radius: 50%;
