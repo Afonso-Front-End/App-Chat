@@ -20,7 +20,7 @@ export default function Chat() {
             lista, listaUsuarios, mensagem, mensagemNotification, mensagemText,
             notification, results, resultsSearch, setMensagemText,
             setValue, userSelected, value, chatHistory, messageWelcome,
-            activeProfile, profileConfig, status, handleOpenMenu,openMenu
+            activeProfile, profileConfig, status, handleOpenMenu, openMenu
         } = UseEvents()
 
 
@@ -32,12 +32,12 @@ export default function Chat() {
 
     return (
         <div className='content'>
-            
+
             <div className="back" onClick={handleOpenMenu}>
                 <button><img src={iconBack} alt="img-back" /></button>
             </div>
 
-            <div className={`left  ${openMenu ? 'left-active': ''}`}>
+            <div className={`left  ${openMenu ? 'left-active' : ''}`}>
                 <div className="profile">
                     <div className="profile-user-login">
 
@@ -45,10 +45,9 @@ export default function Chat() {
 
                         <div className="profile-user-login-data">
                             <div className="profile-user-login-data-info">
-                                <p id="nome">{userLog.nome}</p>
+                                <p id="nome">{userLog.nome} <span id="status">{status}</span></p>
                                 <p id="email">{userLog.email}</p>
                             </div>
-                            <span id="status">{status}</span>
                         </div>
                     </div>
 
@@ -137,7 +136,7 @@ export default function Chat() {
                     {notification && (
                         <div className="mensagem-notification">
                             <div className="tags_msg">
-                                <p>{mensagemNotification.mensagem.nome} Adicionou vocé!</p> 
+                                <p>{mensagemNotification.mensagem.nome} Adicionou vocé!</p>
                             </div>
                             <div className="profile_notification">
                                 <div className="profile_notification_img">

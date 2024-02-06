@@ -108,6 +108,7 @@ const UseEvents = () => {
         });
 
         socket.on('novaMensagem', (mensagem) => {
+            // console.log(mensagem)
             if (mensagem.remetente === userSelected.identifier) {
                 setChatHistory([...chatHistory, mensagem]);
             } else {
@@ -124,7 +125,7 @@ const UseEvents = () => {
             setChatHistory([...chatHistory, ...historicoFormatado]);
         });
 
-        socket.on('status',(mensagem)=>{
+        socket.on('status', (mensagem) => {
             setStatus(mensagem.mensagem)
         })
 
@@ -220,12 +221,13 @@ const UseEvents = () => {
     }
 
     const handleOpenMenu = () => {
-        if(!openMenu){
+        if (!openMenu) {
             setOpenMenu(true)
-        }else{
+        } else {
             setOpenMenu(false)
         }
     }
+
 
     return {
         handleSearch,
