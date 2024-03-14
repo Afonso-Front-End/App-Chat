@@ -94,6 +94,7 @@ const UseEvents = () => {
             if (data.length > 0) {
                 setLista(true)
                 setListaUsuarios(data)
+                console.log(lista)
             }
         })
 
