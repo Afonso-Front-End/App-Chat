@@ -52,6 +52,7 @@ export default function DataToken() {
                         console.log("Token expirado, removido do localStorage.");
                         // alert()
                         window.location.assign('https://login-users-systen.netlify.app/')
+                        // window.location.assign('http://localhost:3002/')
                     }
                 }, 1000);
 
@@ -77,6 +78,7 @@ export default function DataToken() {
                 processToken(tokenNoLocalStorage);
             } else {
                 window.location.assign('https://login-users-systen.netlify.app/')
+                // window.location.assign('http://localhost:3002/')
             }
         }
     }, []);
@@ -84,6 +86,7 @@ export default function DataToken() {
     const exite = () => {
         localStorage.removeItem("token");
         window.location.assign('https://login-users-systen.netlify.app/')
+        // window.location.assign('http://localhost:3002/')
     }
     return {
         token,
