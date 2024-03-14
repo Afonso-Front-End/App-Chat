@@ -23,6 +23,7 @@ export default function Chat() {
             activeProfile, profileConfig, status, handleOpenMenu, openMenu
         } = UseEvents()
 
+        console.log(listaUsuarios)
 
     useEffect(() => {
         if (messagesRef.current) {
